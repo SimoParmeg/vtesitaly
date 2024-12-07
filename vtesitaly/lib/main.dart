@@ -93,6 +93,50 @@ class _MyHomePageState extends State<MyHomePage> {
                         fontWeight: FontWeight.w300
                       ),
                     )
+                  ),
+                  TextButton(
+                    onPressed: (){}, 
+                    child: const Text(
+                      "Schedule",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w300
+                      ),
+                    )
+                  ),
+                  TextButton(
+                    onPressed: (){}, 
+                    child: const Text(
+                      "Accomodation",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w300
+                      ),
+                    )
+                  ),
+                  TextButton(
+                    onPressed: (){}, 
+                    child: const Text(
+                      "Side Events",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w300
+                      ),
+                    )
+                  ),
+                  TextButton(
+                    onPressed: (){}, 
+                    child: const Text(
+                      "Contact",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w300
+                      ),
+                    )
                   )
                 ]
               )
