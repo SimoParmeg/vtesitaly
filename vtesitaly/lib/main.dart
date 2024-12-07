@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisSize: MainAxisSize.max,
             children: [
               const Text(
-                "VTES AEmilia",
+                "VTES Æmilia",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 24,
