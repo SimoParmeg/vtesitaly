@@ -15,7 +15,12 @@ class _EventRowState extends State<EventRow> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Column(),
-        Image.asset("images/vtes_italy.jpeg")
+        Image.asset(
+          "images/Oblivion.jpeg",
+          width: 500,
+          height: 500,
+          fit: BoxFit.cover,
+        )
       ],
     );
   }
