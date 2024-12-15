@@ -47,7 +47,7 @@ class _EventRowState extends State<EventRow> {
 
       if (_remainingTime.isNegative) {
         _timer.cancel();
-        formattedCountdown = "Evento Iniziato!";
+        formattedCountdown = "Event Started!";
       } else {
         final int totalDays = _remainingTime.inDays;
         final int years = totalDays ~/ 365;
@@ -81,13 +81,36 @@ class _EventRowState extends State<EventRow> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Italian Grand Prix 2024-25", 
-              style: TextStyle(
-                fontSize: 40, 
-                fontWeight: FontWeight.bold
-              )
-            ),
+            RichText(
+                text: const TextSpan(
+                    children: [
+                    TextSpan(
+                        text: "Italian ",
+                        style: TextStyle(
+                        fontSize: 40, 
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        ),
+                    ),
+                    TextSpan(
+                        text: "Grand Prix ",
+                        style: TextStyle(
+                        fontSize: 40, 
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepPurple ,
+                        ),
+                    ),
+                    TextSpan(
+                        text: "2024-25",
+                        style: TextStyle(
+                        fontSize: 40, 
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black, 
+                        ),
+                    ),
+                    ],
+                ),
+                ),
             const SizedBox(
               height: 16
             ),
