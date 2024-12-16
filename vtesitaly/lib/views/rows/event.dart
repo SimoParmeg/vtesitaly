@@ -97,7 +97,7 @@ class _EventRowState extends State<EventRow> {
                         style: TextStyle(
                         fontSize: 40, 
                         fontWeight: FontWeight.bold,
-                        color: Colors.deepPurple ,
+                        color: Colors.blue ,
                         ),
                     ),
                     TextSpan(
