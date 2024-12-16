@@ -6,7 +6,7 @@ import 'package:vtesitaly/config.dart';
 
 class EventRow extends StatefulWidget {
 
-  const EventRow({super.key});
+  const EventRow({Key? key}) : super(key: key);
 
   @override
   State<EventRow> createState() => _EventRowState();
@@ -78,7 +78,6 @@ class _EventRowState extends State<EventRow> {
     final isMobile = MediaQuery.of(context).size.width < TRESHOLD_MOBILEMAXWIDTH;
     
     return !isMobile ? Row(
-      key: widget.key,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -86,7 +85,6 @@ class _EventRowState extends State<EventRow> {
         _buildImageWidget(isMobile)
       ]
     ) : Column(
-      key: widget.key,
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

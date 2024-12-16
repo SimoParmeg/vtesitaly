@@ -31,7 +31,7 @@ class _ScheduleTileState extends State<ScheduleTile> {
         ),
         child: widget.icondata
       ),
-      title: _buildRichTextTitle(), // Chiama il metodo interno alla classe
+      title: _buildRichTextTitle(),
       subtitle: widget.subtitle != null ? Text(widget.subtitle!) : null,
     );
   }

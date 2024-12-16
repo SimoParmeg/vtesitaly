@@ -2,17 +2,18 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:vtesitaly/config.dart';
+import 'package:vtesitaly/views/components/accomodation_tile.dart';
 import 'package:vtesitaly/views/components/schedule_tile.dart';
 
-class ScheduleRow extends StatefulWidget {
+class AccomodationRow extends StatefulWidget {
 
-  const ScheduleRow({Key? key}) : super(key: key);
+  const AccomodationRow({Key? key}) : super(key: key);
 
   @override
-  State<ScheduleRow> createState() => _ScheduleRowState();
+  State<AccomodationRow> createState() => _AccomodationRowState();
 }
 
-class _ScheduleRowState extends State<ScheduleRow> {
+class _AccomodationRowState extends State<AccomodationRow> {
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +27,8 @@ class _ScheduleRowState extends State<ScheduleRow> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildImageWidget(isMobile),
-            _buildColumnWidget()       
+            _buildColumnWidget(),
+            _buildImageWidget(isMobile)
           ]
         ),
       ],
@@ -45,55 +46,51 @@ class _ScheduleRowState extends State<ScheduleRow> {
 
   }
 
-  Widget _buildTitleWidget(){
-    return const Text(
-      "Schedule",
-      textAlign: TextAlign.center,
-      style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-    );
-  }
+
+Widget _buildTitleWidget() {
+  return const Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Text(
+        "Accomodation",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 36, 
+          color: Colors.blue, 
+          fontWeight: FontWeight.bold
+        ),
+      ),
+      SizedBox(height: 8), // Spaziatura tra i testi
+      Text(
+        "Where should I stay?",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 30, fontWeight: FontWeight.w400),
+      ),
+    ],
+  );
+}
+
 
 Widget _buildColumnWidget() {
   return Expanded(
     child: ListView(
       shrinkWrap: true,
-      children: [
-        const ScheduleTile(
-          icondata: Icon(Icons.access_alarm, color: Colors.white),
-          title: "Registration time: ",
-          time: "8:45-9:15",
-          subtitle: "Please remember to send your decklist the day before the event!",
+      children: const [
+        AccomodationTile(
+          icondata: Icon(Icons.info, color: Colors.white),
+          title: "Hotel Baia del Re ****",
+          subtitle: "The event will take place at this hotel",
         ),
-        ScheduleTile(
-          icondata: _buildCircleWithText("1"),
-          title: "First Round: ",
-          time: "9:30-11:30"
+        AccomodationTile(
+          icondata: Icon(Icons.info, color: Colors.white),
+          title: "Villa Aurora B&B",
+          subtitle: "5 minutes walking from the tournament location"
         ),
-        ScheduleTile(
-          icondata: _buildCircleWithText("2"),
-          title: "Second Round: ",
-          time: "11:45- 13:45"
-        ),
-        const ScheduleTile(
-          icondata: Icon(
-            Icons.restaurant,
-            color: Colors.white,
-          ),
-          title: "Lunch time: ",
-          time: "13:45- 15:30"
-        ),
-        ScheduleTile(
-          icondata: _buildCircleWithText("3"),
-          title: "Third Round: ",
-          time: "15:30-17:30"
-        ),
-        const ScheduleTile(
-          icondata: Icon(
-            Icons.emoji_events, 
-            color: Colors.white),
-          title: "Final Round: ",
-          time: "18:00-20:00"
-        ),
+        AccomodationTile(
+          icondata: Icon(Icons.info, color: Colors.white),
+          title: "B&B Anna",
+          subtitle: "5 minutes by car from the tournament location"
+        )
       ],
     ),
   );
@@ -103,7 +100,7 @@ Widget _buildColumnWidget() {
   Widget _buildImageWidget(bool isMobile){
     
     return Image.asset(
-      "assets/images/disguised.jpeg",
+      "assets/images/charisma.jpeg",
       width: !isMobile 
         ? min(500, MediaQuery.of(context).size.width/2-32) 
         : MediaQuery.of(context).size.width-32,

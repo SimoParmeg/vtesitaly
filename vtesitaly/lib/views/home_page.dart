@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vtesitaly/views/rows/accomodation.dart';
 import 'package:vtesitaly/views/rows/event.dart';
 import 'package:vtesitaly/views/rows/schedule.dart';
 
@@ -24,7 +25,9 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 40),
             EventRow(key: widget.keys[0]),
             const SizedBox(height: 40),
-            ScheduleRow(key: widget.keys[1])
+            ScheduleRow(key: widget.keys[1]),
+            const SizedBox(height: 40),
+            AccomodationRow(key: widget.keys[2]),
           ],
         ),
       ),
