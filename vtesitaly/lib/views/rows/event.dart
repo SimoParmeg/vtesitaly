@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:vtesitaly/config.dart';
 
 class EventRow extends StatefulWidget {
+
   const EventRow({super.key});
 
   @override
@@ -73,109 +75,133 @@ class _EventRowState extends State<EventRow> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    final isMobile = MediaQuery.of(context).size.width < TRESHOLD_MOBILEMAXWIDTH;
+    
+    return !isMobile ? Row(
+      key: widget.key,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            RichText(
-                text: const TextSpan(
-                    children: [
-                    TextSpan(
-                        text: "Italian ",
-                        style: TextStyle(
-                        fontSize: 40, 
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        ),
-                    ),
-                    TextSpan(
-                        text: "Grand Prix ",
-                        style: TextStyle(
-                        fontSize: 40, 
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue ,
-                        ),
-                    ),
-                    TextSpan(
-                        text: "2024-25",
-                        style: TextStyle(
-                        fontSize: 40, 
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black, 
-                        ),
-                    ),
-                    ],
+        _buildColumnWidget(),
+        _buildImageWidget(isMobile)
+      ]
+    ) : Column(
+      key: widget.key,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildImageWidget(isMobile),
+        const SizedBox(height:20),
+        _buildColumnWidget()        
+      ]
+    );
+
+  }
+
+  Widget _buildColumnWidget(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          text: const TextSpan(
+            children: [
+              TextSpan(
+                text: "Italian ",
+                style: TextStyle(
+                  fontSize: 40, 
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
+              ),
+              TextSpan(
+                text: "Grand Prix ",
+                style: TextStyle(
+                  fontSize: 40, 
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue ,
                 ),
-            const SizedBox(
-              height: 16
-            ),
-            const Text(
-              "Modena, Italy", 
-              style: TextStyle(
-                fontSize: 18, 
-                fontWeight: FontWeight.w300,
-                color: Colors.blue
-              )
-            ),
-            const SizedBox(
-              height: 4
-            ),
-            const Text(
-              "March 1st, 2025", 
-              style: TextStyle(
-                fontSize: 18, 
-                fontWeight: FontWeight.w300,
-                color: Colors.blue
-              )
-            ),
-            const SizedBox(
-              height: 12
-            ),
-            const Text(
-              "Event starts in:", 
-              style: TextStyle(
-                fontSize: 18, 
-                fontWeight: FontWeight.w300,
-                color: Colors.black
-              )
-            ),
-            const SizedBox(
-              height: 20
-            ),
-            Text(
-              formattedCountdown, 
-              style: const TextStyle(
-                fontSize: 25, 
-                fontWeight: FontWeight.w300,
-                color: Colors.black
-              )
-            ),
-            const SizedBox(
-              height: 12
-            ),
-            const Text(
-              "Subscriptions Available Soon!", 
-              style: TextStyle(
-                fontSize: 30, 
-                fontWeight: FontWeight.bold,
-                color: Colors.red
-              )
-            ),
-          ],
+              ),
+              TextSpan(
+                text: "2024-25",
+                style: TextStyle(
+                  fontSize: 40, 
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black, 
+                ),
+              ),
+            ],
+          ),
         ),
-        Image.asset(
-          "assets/images/KarlSchrekt.jpeg",
-          // width: MediaQuery.of(context).size.width/2-32,
-          width: min(500, MediaQuery.of(context).size.width/2-32),
-          height: min(500, MediaQuery.of(context).size.width/2-32),
-          fit: BoxFit.cover,
-        )
+        const SizedBox(
+          height: 16
+        ),
+        const Text(
+          "Modena, Italy", 
+          style: TextStyle(
+            fontSize: 18, 
+            fontWeight: FontWeight.w300,
+            color: Colors.blue
+          )
+        ),
+        const SizedBox(
+          height: 4
+        ),
+        const Text(
+          "March 1st, 2025", 
+          style: TextStyle(
+            fontSize: 18, 
+            fontWeight: FontWeight.w300,
+            color: Colors.blue
+          )
+        ),
+        const SizedBox(
+          height: 12
+        ),
+        const Text(
+          "Event starts in:", 
+          style: TextStyle(
+            fontSize: 18, 
+            fontWeight: FontWeight.w300,
+            color: Colors.black
+          )
+        ),
+        const SizedBox(
+          height: 20
+        ),
+        Text(
+          formattedCountdown, 
+          style: const TextStyle(
+            fontSize: 25, 
+            fontWeight: FontWeight.w300,
+            color: Colors.black
+          )
+        ),
+        const SizedBox(
+          height: 12
+        ),
+        const Text(
+          "Subscriptions Available Soon!", 
+          style: TextStyle(
+            fontSize: 30, 
+            fontWeight: FontWeight.bold,
+            color: Colors.red
+          )
+        ),
       ],
+    );
+  }
+
+  Widget _buildImageWidget(bool isMobile){
+    
+    return Image.asset(
+      "assets/images/KarlSchrekt.jpeg",
+      // width: MediaQuery.of(context).size.width/2-32,
+      width: !isMobile ? min(500, MediaQuery.of(context).size.width/2-32) 
+        : MediaQuery.of(context).size.width-32,
+      height: !isMobile ? min(500, MediaQuery.of(context).size.width/2-32) 
+        : MediaQuery.of(context).size.width-32,
+      fit: BoxFit.cover,
     );
   }
 }

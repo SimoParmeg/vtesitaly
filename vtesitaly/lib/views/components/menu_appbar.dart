@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:vtesitaly/views/components/menu_button.dart';
+import 'package:vtesitaly/config.dart';
+
 
 class MenuAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const MenuAppBar({super.key});
+
+  final List<VoidCallback> callbacks;
+  
+  const MenuAppBar({super.key, required this.callbacks});
 
   @override
   State<MenuAppBar> createState() => _MenuAppBarState();
@@ -14,6 +19,7 @@ class MenuAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _MenuAppBarState extends State<MenuAppBar> {
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < TRESHOLD_MOBILEMAXWIDTH;
     return AppBar(
       leading: const Padding(
         padding: EdgeInsets.all(10.0),
@@ -28,34 +34,34 @@ class _MenuAppBarState extends State<MenuAppBar> {
       ),
       leadingWidth: 300,
       centerTitle: true,
-      title: Row(
+      title: !isMobile ? Row(
         mainAxisAlignment:  MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
           MenuButton(
             title: "Event",
-            onTap: (){}
+            onTap: widget.callbacks[0]
           ),
           MenuButton(
             title: "Schedule",
-            onTap: (){}
+            onTap: widget.callbacks[1]
           ),
           MenuButton(
             title: "Accomodation",
-            onTap: (){}
+            onTap: widget.callbacks[2]
           ),
           MenuButton(
             title: "Other Events",
-            onTap: (){}
+            onTap: widget.callbacks[3]
           ),
           MenuButton(
             title: "Contact",
-            onTap: (){}
+            onTap: widget.callbacks[4]
           ),
         ]
-      ),
-      actions: [
+      ) : Container(),
+      actions: !isMobile ? [
         TextButton(
           onPressed: (){}, 
           child: const Text(
@@ -68,7 +74,7 @@ class _MenuAppBarState extends State<MenuAppBar> {
           ), 
           onPressed: () {  },
         )
-      ], 
+      ] : [],
     );
   }
 }

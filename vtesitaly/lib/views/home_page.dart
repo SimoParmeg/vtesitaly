@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:vtesitaly/views/rows/event.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+
+  final List <GlobalKey> keys;
+
+  const HomePage({super.key, required this.keys});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -11,14 +14,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 32.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(height: 40),
-          EventRow()      
-        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32.0),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(height: 40),
+            EventRow(key: widget.keys[0]),
+            const SizedBox(height: 40)
+          ],
+        ),
       ),
     );
   }

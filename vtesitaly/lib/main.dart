@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtesitaly/views/components/menu_appbar.dart';
+import 'package:vtesitaly/views/components/menu_enddrawer.dart';
 import 'package:vtesitaly/views/home_page.dart';
 
 void main() {
@@ -30,12 +31,44 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final List<GlobalKey> _keys = [
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey()
+  ];
+
+
+  void _scrollToWidget (GlobalKey key) {
+    final context = key.currentContext;
+
+    if (context != null) {
+      Scrollable.ensureVisible(
+        context,
+        duration: const Duration(
+          seconds: 1
+        ),
+        curve: Curves.easeInOutSine
+      );
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
 
-    return const Scaffold(
-      appBar: MenuAppBar(),
-      body: HomePage()
+    return Scaffold(
+      appBar: MenuAppBar(callbacks: [
+          () => _scrollToWidget(_keys[0]),
+          () => _scrollToWidget(_keys[1]),
+          () => _scrollToWidget(_keys[2]),
+          () => _scrollToWidget(_keys[3]),
+          () => _scrollToWidget(_keys[4]),
+        ],
+      ),
+      endDrawer: const MenuEndDrawer(),
+      body: HomePage(keys: _keys)
     );
   }
 }
