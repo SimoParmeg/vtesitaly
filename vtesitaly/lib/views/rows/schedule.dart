@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vtesitaly/config.dart';
 import 'package:vtesitaly/views/components/schedule_tile.dart';
 
