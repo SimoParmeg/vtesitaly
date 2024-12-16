@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtesitaly/views/rows/event.dart';
+import 'package:vtesitaly/views/rows/schedule.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -22,7 +23,8 @@ class _HomePageState extends State<HomePage> {
           children: [
             const SizedBox(height: 40),
             EventRow(key: widget.keys[0]),
-            const SizedBox(height: 40)
+            const SizedBox(height: 40),
+            ScheduleRow(key: widget.keys[1])
           ],
         ),
       ),

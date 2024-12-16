@@ -196,10 +196,11 @@ class _EventRowState extends State<EventRow> {
     
     return Image.asset(
       "assets/images/KarlSchrekt.jpeg",
-      // width: MediaQuery.of(context).size.width/2-32,
-      width: !isMobile ? min(500, MediaQuery.of(context).size.width/2-32) 
+      width: !isMobile 
+        ? min(500, MediaQuery.of(context).size.width/2-32) 
         : MediaQuery.of(context).size.width-32,
-      height: !isMobile ? min(500, MediaQuery.of(context).size.width/2-32) 
+      height: !isMobile 
+        ? min(500, MediaQuery.of(context).size.width/2-32) 
         : MediaQuery.of(context).size.width-32,
       fit: BoxFit.cover,
     );

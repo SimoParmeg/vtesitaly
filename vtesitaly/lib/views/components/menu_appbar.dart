@@ -21,9 +21,9 @@ class _MenuAppBarState extends State<MenuAppBar> {
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < TRESHOLD_MOBILEMAXWIDTH;
     return AppBar(
-      leading: const Padding(
-        padding: EdgeInsets.all(10.0),
-        child: Text(
+      leading: Padding(
+        padding: !isMobile ? const EdgeInsets.all(10.0) : const EdgeInsets.only(top: 10, left: 32),
+        child: const Text(
           "VTES Æmilia",
           style: TextStyle(
             color: Colors.black,
