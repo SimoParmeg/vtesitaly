@@ -7,7 +7,7 @@ import 'package:vtesitaly/views/components/accomodation_tile.dart';
 
 class AccomodationRow extends StatefulWidget {
 
-  const AccomodationRow({Key? key}) : super(key: key);
+  const AccomodationRow({super.key});
 
   @override
   State<AccomodationRow> createState() => _AccomodationRowState();

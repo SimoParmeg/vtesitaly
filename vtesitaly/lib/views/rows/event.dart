@@ -6,7 +6,7 @@ import 'package:vtesitaly/config.dart';
 
 class EventRow extends StatefulWidget {
 
-  const EventRow({Key? key}) : super(key: key);
+  const EventRow({super.key});
 
   @override
   State<EventRow> createState() => _EventRowState();
@@ -82,7 +82,8 @@ class _EventRowState extends State<EventRow> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildColumnWidget(),
-        _buildImageWidget(isMobile)
+        _buildImageWidget(isMobile),
+        
       ]
     ) : Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -195,10 +196,10 @@ class _EventRowState extends State<EventRow> {
     return Image.asset(
       "assets/images/logo_gp.jpeg",
       width: !isMobile 
-        ? min(500, MediaQuery.of(context).size.width/2-32) 
+        ? min(475, MediaQuery.of(context).size.width/2-32) 
         : MediaQuery.of(context).size.width-32,
       height: !isMobile 
-        ? min(500, MediaQuery.of(context).size.width/2-32) 
+        ? min(475, MediaQuery.of(context).size.width/2-32) 
         : MediaQuery.of(context).size.width-32,
       fit: BoxFit.cover,
     );

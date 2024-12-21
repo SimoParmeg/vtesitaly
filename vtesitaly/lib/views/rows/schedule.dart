@@ -6,7 +6,7 @@ import 'package:vtesitaly/views/components/schedule_tile.dart';
 
 class ScheduleRow extends StatefulWidget {
 
-  const ScheduleRow({Key? key}) : super(key: key);
+  const ScheduleRow({super.key});
 
   @override
   State<ScheduleRow> createState() => _ScheduleRowState();

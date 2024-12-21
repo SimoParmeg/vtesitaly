@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 // import 'package:url_launcher/url_launcher.dart';
 
-class AccomodationTile extends StatefulWidget {
+class OtherEventsTile extends StatefulWidget {
   final Widget icondata;
   final String title;
   final String? subtitle;
   final String? linkUrl;
   final String? filePath;
 
-  const AccomodationTile({
+  const OtherEventsTile({
     super.key,
     required this.icondata,
     required this.title,
@@ -18,10 +18,10 @@ class AccomodationTile extends StatefulWidget {
   });
 
   @override
-  State<AccomodationTile> createState() => _AccomodationTileState();
+  State<OtherEventsTile> createState() => _OtherEventsTileState();
 }
 
-class _AccomodationTileState extends State<AccomodationTile> {
+class _OtherEventsTileState extends State<OtherEventsTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
