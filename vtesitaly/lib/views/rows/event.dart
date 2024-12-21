@@ -193,7 +193,7 @@ class _EventRowState extends State<EventRow> {
   Widget _buildImageWidget(bool isMobile){
     
     return Image.asset(
-      "assets/images/KarlSchrekt.jpeg",
+      "assets/images/logo_gp.jpeg",
       width: !isMobile 
         ? min(500, MediaQuery.of(context).size.width/2-32) 
         : MediaQuery.of(context).size.width-32,

@@ -58,41 +58,59 @@ Widget _buildColumnWidget() {
     child: ListView(
       shrinkWrap: true,
       children: [
-        const ScheduleTile(
-          icondata: Icon(Icons.access_alarm, color: Colors.white),
-          title: "Registration time: ",
-          time: "8:45-9:15",
-          subtitle: "Please remember to send your decklist the day before the event!",
-        ),
-        ScheduleTile(
-          icondata: _buildCircleWithText("1"),
-          title: "First Round: ",
-          time: "9:30-11:30"
-        ),
-        ScheduleTile(
-          icondata: _buildCircleWithText("2"),
-          title: "Second Round: ",
-          time: "11:45- 13:45"
-        ),
-        const ScheduleTile(
-          icondata: Icon(
-            Icons.restaurant,
-            color: Colors.white,
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 17.0),
+          child: ScheduleTile(
+            icondata: Icon(Icons.access_alarm, color: Colors.white),
+            title: "Registration time: ",
+            time: "8:45-9:15",
+            subtitle: "Please remember to send your decklist the day before the event!",
           ),
-          title: "Lunch time: ",
-          time: "13:45- 15:30"
         ),
-        ScheduleTile(
-          icondata: _buildCircleWithText("3"),
-          title: "Third Round: ",
-          time: "15:30-17:30"
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 17.0),
+          child: ScheduleTile(
+            icondata: _buildCircleWithText("1"),
+            title: "First Round: ",
+            time: "9:30-11:30"
+          ),
         ),
-        const ScheduleTile(
-          icondata: Icon(
-            Icons.emoji_events, 
-            color: Colors.white),
-          title: "Final Round: ",
-          time: "18:00-20:00"
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 17.0),
+          child: ScheduleTile(
+            icondata: _buildCircleWithText("2"),
+            title: "Second Round: ",
+            time: "11:45- 13:45"
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 17.0),
+          child: ScheduleTile(
+            icondata: Icon(
+              Icons.restaurant,
+              color: Colors.white,
+            ),
+            title: "Lunch time: ",
+            time: "13:45- 15:30"
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 17.0),
+          child: ScheduleTile(
+            icondata: _buildCircleWithText("3"),
+            title: "Third Round: ",
+            time: "15:30-17:30"
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 17.0),
+          child: ScheduleTile(
+            icondata: Icon(
+              Icons.emoji_events, 
+              color: Colors.white),
+            title: "Final Round: ",
+            time: "18:00-20:00"
+          ),
         ),
       ],
     ),
