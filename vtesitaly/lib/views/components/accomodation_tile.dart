@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AccomodationTile extends StatefulWidget {
   final Widget icondata;
@@ -39,29 +38,7 @@ class _AccomodationTileState extends State<AccomodationTile> {
         ),
       ),
       subtitle: widget.subtitle != null ? Text(widget.subtitle!) : null,
-      onTap: widget.link != null ? _downloadFile : null,
     );
   }
 
-  Future<void> _downloadFile() async {
-    if (widget.link == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("No link provided."),
-        ),
-      );
-      return;
-    }
-
-    final Uri url = Uri.parse(widget.link!);
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Could not launch the link."),
-        ),
-      );
-    }
-  }
 }

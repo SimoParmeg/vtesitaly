@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:vtesitaly/config.dart';
 import 'package:vtesitaly/views/components/accomodation_tile.dart';
-import 'package:vtesitaly/views/components/schedule_tile.dart';
 
 class AccomodationRow extends StatefulWidget {
 
