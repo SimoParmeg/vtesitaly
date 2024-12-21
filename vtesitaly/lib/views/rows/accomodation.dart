@@ -76,20 +76,29 @@ Widget _buildColumnWidget() {
     child: ListView(
       shrinkWrap: true,
       children: const [
-        AccomodationTile(
-          icondata: Icon(Icons.info, color: Colors.white),
-          title: "Hotel Baia del Re ****",
-          subtitle: "The event will take place at this hotel",
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 18.0),
+          child: AccomodationTile(
+            icondata: Icon(Icons.info, color: Colors.white),
+            title: "Hotel Baia del Re ****",
+            subtitle: "The event will take place at this hotel",
+          ),
         ),
-        AccomodationTile(
-          icondata: Icon(Icons.info, color: Colors.white),
-          title: "Villa Aurora B&B",
-          subtitle: "5 minutes walking from the tournament location"
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 18.0),
+          child: AccomodationTile(
+            icondata: Icon(Icons.info, color: Colors.white),
+            title: "Villa Aurora B&B",
+            subtitle: "5 minutes walking from the tournament location"
+          ),
         ),
-        AccomodationTile(
-          icondata: Icon(Icons.info, color: Colors.white),
-          title: "B&B Anna",
-          subtitle: "5 minutes by car from the tournament location"
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 18.0),
+          child: AccomodationTile(
+            icondata: Icon(Icons.info, color: Colors.white),
+            title: "B&B Anna",
+            subtitle: "5 minutes by car from the tournament location"
+          ),
         )
       ],
     ),
