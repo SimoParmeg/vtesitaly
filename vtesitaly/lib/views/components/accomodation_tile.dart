@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AccomodationTile extends StatefulWidget {
   final Widget icondata;
   final String title;
-  final String? link;
   final String? subtitle;
+  final String? linkUrl;
+  final String? filePath;
 
   const AccomodationTile({
     super.key,
     required this.icondata,
     required this.title,
-    this.link,
     this.subtitle,
+    this.linkUrl,
+    this.filePath
   });
 
   @override

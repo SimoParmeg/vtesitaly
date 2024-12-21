@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:vtesitaly/config.dart';
 import 'package:vtesitaly/views/components/accomodation_tile.dart';
 
+
 class AccomodationRow extends StatefulWidget {
 
   const AccomodationRow({Key? key}) : super(key: key);
