@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:vtesitaly/config.dart';
 import 'package:vtesitaly/views/components/schedule_tile.dart';
+import 'package:vtesitaly/views/components/section_title.dart';
 
 class ScheduleRow extends StatefulWidget {
 
@@ -23,11 +24,12 @@ class _ScheduleRowState extends State<ScheduleRow> {
         _buildTitleWidget(),
         const SizedBox(height:20),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
           children: [
             _buildImageWidget(isMobile),
-            _buildColumnWidget()       
+            _buildColumnWidget(isMobile)
           ]
         ),
       ],
@@ -37,7 +39,7 @@ class _ScheduleRowState extends State<ScheduleRow> {
       children: [
         _buildTitleWidget(),
         const SizedBox(height:20),
-        _buildColumnWidget(),
+        _buildColumnWidget(isMobile),
         const SizedBox(height:20),
         _buildImageWidget(isMobile)
       ]
@@ -45,18 +47,17 @@ class _ScheduleRowState extends State<ScheduleRow> {
 
   }
 
-  Widget _buildTitleWidget(){
-    return const Text(
-      "Schedule",
-      textAlign: TextAlign.center,
-      style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+  Widget _buildTitleWidget() {
+    return const SectionTitle(
+      title: "Schedule",
     );
   }
 
-Widget _buildColumnWidget() {
-  return Expanded(
-    child: ListView(
-      shrinkWrap: true,
+Widget _buildColumnWidget(bool isMobile) {
+  return SizedBox(
+    height: 550,
+    width: !isMobile ? 480 : MediaQuery.of(context).size.width,
+    child: Column(
       children: [
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 17.0),
@@ -119,16 +120,18 @@ Widget _buildColumnWidget() {
 
 
   Widget _buildImageWidget(bool isMobile){
-    
-    return Image.asset(
-      "assets/images/disguised.jpeg",
-      width: !isMobile 
-        ? min(500, MediaQuery.of(context).size.width/2-32) 
-        : MediaQuery.of(context).size.width-32,
-      height: !isMobile 
-        ? min(500, MediaQuery.of(context).size.width/2-32) 
-        : MediaQuery.of(context).size.width-32,
-      fit: BoxFit.cover,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: Image.asset(
+        "assets/images/disguised.jpeg",
+        width: !isMobile 
+          ? min(480, MediaQuery.of(context).size.width/2-32) 
+          : MediaQuery.of(context).size.width-32,
+        height: !isMobile 
+          ? min(480, MediaQuery.of(context).size.width/2-32) 
+          : MediaQuery.of(context).size.width-32,
+        fit: BoxFit.cover,
+      )
     );
   }
 

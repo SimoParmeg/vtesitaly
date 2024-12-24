@@ -71,8 +71,6 @@ class _EventRowState extends State<EventRow> {
   }
 
 
-
-
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < TRESHOLD_MOBILEMAXWIDTH;
@@ -192,16 +190,18 @@ class _EventRowState extends State<EventRow> {
   }
 
   Widget _buildImageWidget(bool isMobile){
-    
-    return Image.asset(
-      "assets/images/logo_gp.jpeg",
-      width: !isMobile 
-        ? min(475, MediaQuery.of(context).size.width/2-32) 
-        : MediaQuery.of(context).size.width-32,
-      height: !isMobile 
-        ? min(475, MediaQuery.of(context).size.width/2-32) 
-        : MediaQuery.of(context).size.width-32,
-      fit: BoxFit.cover,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: Image.asset(
+        "assets/images/logo_gp.jpeg",
+        width: !isMobile 
+          ? min(475, MediaQuery.of(context).size.width/2-32) 
+          : MediaQuery.of(context).size.width-32,
+        height: !isMobile 
+          ? min(475, MediaQuery.of(context).size.width/2-32) 
+          : MediaQuery.of(context).size.width-32,
+        fit: BoxFit.cover,
+      )
     );
   }
 }

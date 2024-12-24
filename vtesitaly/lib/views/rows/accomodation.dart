@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:vtesitaly/config.dart';
 import 'package:vtesitaly/views/components/accomodation_tile.dart';
+import 'package:vtesitaly/views/components/section_title.dart';
 
 
 class AccomodationRow extends StatefulWidget {
@@ -24,10 +25,11 @@ class _AccomodationRowState extends State<AccomodationRow> {
         _buildTitleWidget(),
         const SizedBox(height:20),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            _buildColumnWidget(),
+            _buildColumnWidget(isMobile),
             _buildImageWidget(isMobile)
           ]
         ),
@@ -38,85 +40,72 @@ class _AccomodationRowState extends State<AccomodationRow> {
       children: [
         _buildTitleWidget(),
         const SizedBox(height:20),
-        _buildColumnWidget(),
+        _buildColumnWidget(isMobile),
         const SizedBox(height:20),
         _buildImageWidget(isMobile)
       ]
     );
+  }
 
+  Widget _buildTitleWidget() {
+    return const SectionTitle(
+      title: "Accomodation",
+      subtitle: "Where should I stay?"
+    );
+  }
+
+  Widget _buildColumnWidget(bool isMobile) {
+    return SizedBox(
+      height: 350,
+      width: !isMobile ? 480 : MediaQuery.of(context).size.width,
+      child: const Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 18.0),
+            child: AccomodationTile(
+              icondata: Icon(Icons.info, color: Colors.white),
+              title: "Hotel Baia del Re ****",
+              subtitle: "The event will take place at this hotel",
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 18.0),
+            child: AccomodationTile(
+              icondata: Icon(Icons.info, color: Colors.white),
+              title: "Villa Aurora B&B",
+              subtitle: "5 minutes walking from the tournament location"
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 18.0),
+            child: AccomodationTile(
+              icondata: Icon(Icons.info, color: Colors.white),
+              title: "B&B Anna",
+              subtitle: "5 minutes by car from the tournament location"
+            ),
+          )
+        ],
+      ),
+    );
   }
 
 
-Widget _buildTitleWidget() {
-  return const Column(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Text(
-        "Accomodation",
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 36, 
-          color: Colors.blue, 
-          fontWeight: FontWeight.bold
-        ),
-      ),
-      SizedBox(height: 8), // Spaziatura tra i testi
-      Text(
-        "Where should I stay?",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 30, fontWeight: FontWeight.w400),
-      ),
-    ],
-  );
-}
-
-
-Widget _buildColumnWidget() {
-  return Expanded(
-    child: ListView(
-      shrinkWrap: true,
-      children: const [
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 18.0),
-          child: AccomodationTile(
-            icondata: Icon(Icons.info, color: Colors.white),
-            title: "Hotel Baia del Re ****",
-            subtitle: "The event will take place at this hotel",
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 18.0),
-          child: AccomodationTile(
-            icondata: Icon(Icons.info, color: Colors.white),
-            title: "Villa Aurora B&B",
-            subtitle: "5 minutes walking from the tournament location"
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 18.0),
-          child: AccomodationTile(
-            icondata: Icon(Icons.info, color: Colors.white),
-            title: "B&B Anna",
-            subtitle: "5 minutes by car from the tournament location"
-          ),
-        )
-      ],
-    ),
-  );
-}
-
-
   Widget _buildImageWidget(bool isMobile){
-    
-    return Image.asset(
-      "assets/images/charisma.jpeg",
-      width: !isMobile 
-        ? min(500, MediaQuery.of(context).size.width/2-32) 
-        : MediaQuery.of(context).size.width-32,
-      height: !isMobile 
-        ? min(500, MediaQuery.of(context).size.width/2-32) 
-        : MediaQuery.of(context).size.width-32,
-      fit: BoxFit.cover,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: Image.asset(
+        "assets/images/charisma.jpeg",
+        width: !isMobile 
+          ? min(480, MediaQuery.of(context).size.width/2-32) 
+          : MediaQuery.of(context).size.width-32,
+        height: !isMobile 
+          ? min(480, MediaQuery.of(context).size.width/2-32) 
+          : MediaQuery.of(context).size.width-32,
+        fit: BoxFit.cover,
+      )
     );
   }
 

@@ -4,7 +4,10 @@ import 'package:vtesitaly/views/components/menu_button.dart';
 
 
 class MenuEndDrawer extends StatefulWidget {
-  const MenuEndDrawer({super.key});
+
+  final List<VoidCallback> callbacks;
+
+  const MenuEndDrawer({super.key, required this.callbacks});
 
   @override
   State<MenuEndDrawer> createState() => _MenuEndDrawerState();
@@ -15,8 +18,11 @@ class _MenuEndDrawerState extends State<MenuEndDrawer> {
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < TRESHOLD_MOBILEMAXWIDTH;
     return isMobile ? Drawer(
-      width: MediaQuery.of(context).size.width,
-      child: ListView(
+      width: MediaQuery.of(context).size.width / 3 * 2,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           const DrawerHeader(
             child: Padding(
@@ -33,23 +39,39 @@ class _MenuEndDrawerState extends State<MenuEndDrawer> {
           ),
           MenuButton(
             title: "Event",
-            onTap: (){}
+            onTap: (){
+              widget.callbacks[0]();
+              Navigator.of(context).pop();
+            }
           ),
+          const SizedBox(height: 24),
           MenuButton(
             title: "Schedule",
-            onTap: (){}
+            onTap: (){
+              widget.callbacks[1]();
+              Navigator.of(context).pop();
+            }
           ),
+          const SizedBox(height: 24),
           MenuButton(
             title: "Accomodation",
-            onTap: (){}
+            onTap: (){
+              widget.callbacks[2]();
+              Navigator.of(context).pop();}
           ),
+          const SizedBox(height: 24),
           MenuButton(
             title: "Other Events",
-            onTap: (){}
+            onTap: (){
+              widget.callbacks[3]();
+              Navigator.of(context).pop();}
           ),
+          const SizedBox(height: 24),
           MenuButton(
             title: "Contact",
-            onTap: (){}
+            onTap: (){
+              widget.callbacks[4]();
+              Navigator.of(context).pop();}
           )        
         ],
       ),

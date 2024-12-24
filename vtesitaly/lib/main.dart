@@ -42,7 +42,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _scrollToWidget (GlobalKey key) {
     final context = key.currentContext;
-
     if (context != null) {
       Scrollable.ensureVisible(
         context,
@@ -67,7 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
           () => _scrollToWidget(_keys[4]),
         ],
       ),
-      endDrawer: const MenuEndDrawer(),
+      endDrawer: MenuEndDrawer(callbacks: [
+        () => _scrollToWidget(_keys[0]),
+        () => _scrollToWidget(_keys[1]),
+        () => _scrollToWidget(_keys[2]),
+        () => _scrollToWidget(_keys[3]),
+        () => _scrollToWidget(_keys[4]),
+      ],),
       body: HomePage(keys: _keys)
     );
   }
