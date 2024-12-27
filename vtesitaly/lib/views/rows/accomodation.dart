@@ -68,7 +68,7 @@ class _AccomodationRowState extends State<AccomodationRow> {
             child: AccomodationTile(
               icondata: Icon(Icons.info, color: Colors.white),
               title: "Hotel Baia del Re ****",
-              subtitle: "The event will take place at this hotel",
+              subtitle: "The event will take place at this hotel, see module for reservation",
             ),
           ),
           Padding(
