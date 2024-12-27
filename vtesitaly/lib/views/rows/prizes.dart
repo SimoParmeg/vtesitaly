@@ -64,7 +64,7 @@ class _PrizesRowState extends State<PrizesRow> {
 
   Widget _buildSectionWidget() {
     return const Text(
-      "World of Darkness has generously donated 21 uncut print sheets from various old expansions of Vampire: The Eternal Struggle (Sabbat War, Final Nights, Camarilla Edition, and Black Hand) as prizes for the Iberian Grand Prix, which will take place in Palma de Mallorca on November 16, 2024.These prizes will be distributed as follows:"
+      "Winner prizes will be distributed in a pyramid manner based on the number of participants. Everyone will receive the welcome pack as door prize."
     );
   }
 
@@ -73,22 +73,22 @@ class _PrizesRowState extends State<PrizesRow> {
       PrizeTile(
         title: "WELCOME PACK",
         lines: Map.fromEntries([
-          const MapEntry("Grand Priz circuit playmat", Icons.tab_rounded),
+          const MapEntry("Grand Prix circuit playmat", Icons.tab_rounded),
           const MapEntry("Grand Prix circuit promo card", Icons.calendar_view_month_outlined),
-          const MapEntry("Commemorative Edge", Icons.refresh),
-          const MapEntry("Pack of cards (see image below)", Icons.calendar_view_month_outlined),
-          const MapEntry("Edge sponsored by VTES Decks", Icons.refresh),
+          // const MapEntry("Commemorative Edge", Icons.refresh),
+          // const MapEntry("Pack of cards (see image below)", Icons.calendar_view_month_outlined),
+          // const MapEntry("Edge sponsored by VTES Decks", Icons.refresh),
         ]),
       ),
       const SizedBox(height: 20),
       PrizeTile(
         title: "PRIZES",
         lines: Map.fromEntries([
-          const MapEntry("Commemorative Chalice of Justicar for top 8 players", Icons.filter_none_rounded),
-          const MapEntry("Print sheet for top 8 players", Icons.grid_4x4_rounded),
-          const MapEntry("Counters by VTES Decks for the finalists", Icons.filter_1_rounded),
-          const MapEntry("Sponsorized UltraPro material", Icons.filter_1_rounded),
-          const MapEntry("Pack of cards for the third round winners", Icons.calendar_view_month_outlined),
+          const MapEntry("Original 'One With the Land' Art, realized by Riccardo Fabiani, for the winner", Icons.filter_1_rounded),
+          const MapEntry("Commemorative Metal Rings for top 10 players", Icons.panorama_horizontal_select),
+          // const MapEntry("Counters by VTES Decks for the finalists", Icons.filter_1_rounded),
+          const MapEntry("Sponsorized UltraPro material", Icons.filter_none_rounded),
+          const MapEntry("Special prize TBA for the third round winners", Icons.calendar_view_month_outlined),
         ]),
       ),
     ];

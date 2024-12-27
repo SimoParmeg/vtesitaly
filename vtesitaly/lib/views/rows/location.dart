@@ -81,7 +81,7 @@ class _LocationRowState extends State<LocationRow> {
               )
             ),
             TextSpan(
-              text: "Reservation Module",
+              text: "Module",
               style: TextStyle(
                 color: Colors.green,
                 fontSize: 27,
@@ -108,27 +108,27 @@ class _LocationRowState extends State<LocationRow> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 18.0),
             child: AccomodationTile(
-              icondata: Icon(Icons.info, color: Colors.white),
-              title: "Hotel Baia del Re ****",
-              subtitle: "The event will take place at this hotel",
+              icondata: Icon(Icons.airplanemode_on_outlined, color: Colors.white),
+              title: "Airplane",
+              subtitle: "Bologna Marconi airport is 35 km away",
             ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 18.0),
             child: AccomodationTile(
-              icondata: Icon(Icons.info, color: Colors.white),
-              title: "Villa Aurora B&B",
-              subtitle: "5 minutes walking from the tournament location"
+              icondata: Icon(Icons.bus_alert_outlined, color: Colors.white),
+              title: "Public Transport",
+              subtitle: "Modena bus station, take the extra-urban bus to Vignola (#731), “Ponte Guerro” stop is about 500 m from the hotel",
             ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 18.0),
             child: AccomodationTile(
-              icondata: Icon(Icons.info, color: Colors.white),
-              title: "B&B Anna",
-              subtitle: "5 minutes by car from the tournament location"
+              icondata: Icon(Icons.car_rental_outlined, color: Colors.white),
+              title: "Car",
+              subtitle: "200m from the 'Modena Sud' highway exit"
             ),
-          )
+          ),
         ],
       ),
     );
