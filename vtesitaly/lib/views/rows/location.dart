@@ -139,7 +139,7 @@ class _LocationRowState extends State<LocationRow> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: Image.asset(
-        "assets/images/Aintzane_Arriaga.jpeg",
+        "assets/images/villon.jpeg",
         width: !isMobile 
           ? min(480, MediaQuery.of(context).size.width/2-32) 
           : MediaQuery.of(context).size.width-32,
