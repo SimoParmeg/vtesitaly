@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class RuleTile extends StatefulWidget {
-  final Widget icondata;
+  final IconData iconData;
   final String title;
 
   const RuleTile({
     super.key,
-    required this.icondata,
+    required this.iconData,
     required this.title,
   });
 
@@ -26,7 +26,10 @@ class _RuleTileState extends State<RuleTile> {
             color: Colors.blue,
             shape: BoxShape.circle,
           ),
-          child: widget.icondata
+          child: Icon(
+            widget.iconData,
+            color: Colors.white
+          ),
         ),
         title: Text(
           widget.title,

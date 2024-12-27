@@ -1,20 +1,28 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:vtesitaly/config.dart';
 import 'package:vtesitaly/views/components/accomodation_tile.dart';
 import 'package:vtesitaly/views/components/section_title.dart';
 
+class LocationRow extends StatefulWidget {
 
-class AccomodationRow extends StatefulWidget {
-
-  const AccomodationRow({super.key});
+  const LocationRow({super.key});
 
   @override
-  State<AccomodationRow> createState() => _AccomodationRowState();
+  State<LocationRow> createState() => _LocationRowState();
 }
 
-class _AccomodationRowState extends State<AccomodationRow> {
+class _LocationRowState extends State<LocationRow> {
+
+  final Uri _url = Uri.parse('/assets/docs/Reservation Form VTES25.doc');
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +31,8 @@ class _AccomodationRowState extends State<AccomodationRow> {
     return !isMobile ? Column(
       children: [
         _buildTitleWidget(),
+        const SizedBox(height:20),
+        _buildSectionWidget(),
         const SizedBox(height:20),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -40,6 +50,8 @@ class _AccomodationRowState extends State<AccomodationRow> {
       children: [
         _buildTitleWidget(),
         const SizedBox(height:20),
+        _buildSectionWidget(),
+        const SizedBox(height:20),
         _buildColumnWidget(isMobile),
         const SizedBox(height:20),
         _buildImageWidget(isMobile)
@@ -49,11 +61,41 @@ class _AccomodationRowState extends State<AccomodationRow> {
 
   Widget _buildTitleWidget() {
     return const SectionTitle(
-      title: "Accomodation",
-      subtitle: "Where should I stay?"
+      title: "Hotel Baia del Re ****",
+      subtitle: "Str. Vignolese, 1684, 41126 Modena (MO)",
     );
   }
 
+  Widget _buildSectionWidget() {
+    return GestureDetector(
+      onTap: _launchUrl,
+      child: RichText(
+        text: const TextSpan(
+          children: [
+            TextSpan(
+              text: "Discounted Reservations: ",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 27,
+                fontWeight: FontWeight.w500
+              )
+            ),
+            TextSpan(
+              text: "Reservation Module",
+              style: TextStyle(
+                color: Colors.green,
+                fontSize: 27,
+                fontWeight: FontWeight.w500,
+                decoration: TextDecoration.underline,
+                decorationColor: Colors.green
+              )
+            )
+          ]
+        )
+      ),
+    );
+  }
+  
   Widget _buildColumnWidget(bool isMobile) {
     return SizedBox(
       height: 350,

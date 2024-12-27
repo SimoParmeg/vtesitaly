@@ -27,7 +27,6 @@ class _AccomodationTileState extends State<AccomodationTile> {
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < TRESHOLD_MOBILEMAXWIDTH;
     return ListTile(
-      leading: _buildLinkWidget(),
       trailing: _buildIconWidget(),
       title: Text(
         widget.title,

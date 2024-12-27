@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vtesitaly/views/rows/accomodation.dart';
 import 'package:vtesitaly/views/rows/event.dart';
+import 'package:vtesitaly/views/rows/location.dart';
 import 'package:vtesitaly/views/rows/other_events.dart';
+import 'package:vtesitaly/views/rows/prizes.dart';
 import 'package:vtesitaly/views/rows/rules.dart';
 import 'package:vtesitaly/views/rows/schedule.dart';
 
@@ -28,6 +30,10 @@ class _HomePageState extends State<HomePage> {
             EventRow(key: widget.keys[0]),
             const SizedBox(height: 40),
             const RulesRow(),
+            const SizedBox(height: 40),
+            const PrizesRow(),
+            const SizedBox(height: 40),
+            const LocationRow(),
             const SizedBox(height: 40),
             ScheduleRow(key: widget.keys[1]),
             const SizedBox(height: 40),

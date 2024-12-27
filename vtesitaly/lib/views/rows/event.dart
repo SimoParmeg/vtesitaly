@@ -59,7 +59,6 @@ class _EventRowState extends State<EventRow> {
         final int minutes = _remainingTime.inMinutes % 60;
         final int seconds = _remainingTime.inSeconds % 60;
 
-        
         formattedCountdown = '${years > 0 ? "$years anni " : ""}'
             '${months > 0 ? "$months months " : ""}'
             '${days > 0 ? "$days days " : ""}'
@@ -106,7 +105,7 @@ class _EventRowState extends State<EventRow> {
               TextSpan(
                 text: "Italian ",
                 style: TextStyle(
-                  fontSize: 40, 
+                  fontSize: 48, 
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
@@ -114,7 +113,7 @@ class _EventRowState extends State<EventRow> {
               TextSpan(
                 text: "Grand Prix ",
                 style: TextStyle(
-                  fontSize: 40, 
+                  fontSize: 48, 
                   fontWeight: FontWeight.bold,
                   color: Colors.blue ,
                 ),
@@ -122,7 +121,7 @@ class _EventRowState extends State<EventRow> {
               TextSpan(
                 text: "2024-25",
                 style: TextStyle(
-                  fontSize: 40, 
+                  fontSize: 48, 
                   fontWeight: FontWeight.bold,
                   color: Colors.black, 
                 ),
@@ -133,12 +132,12 @@ class _EventRowState extends State<EventRow> {
         const SizedBox(
           height: 16
         ),
-        const Text(
+        Text(
           "Modena, Italy", 
           style: TextStyle(
-            fontSize: 18, 
-            fontWeight: FontWeight.w300,
-            color: Colors.blue
+            fontSize: 20, 
+            fontWeight: FontWeight.w900,
+            color: Colors.black.withOpacity(0.6)
           )
         ),
         const SizedBox(
@@ -147,8 +146,8 @@ class _EventRowState extends State<EventRow> {
         const Text(
           "March 1st, 2025", 
           style: TextStyle(
-            fontSize: 18, 
-            fontWeight: FontWeight.w300,
+            fontSize: 20, 
+            fontWeight: FontWeight.w900,
             color: Colors.blue
           )
         ),
@@ -158,8 +157,8 @@ class _EventRowState extends State<EventRow> {
         const Text(
           "Event starts in:", 
           style: TextStyle(
-            fontSize: 18, 
-            fontWeight: FontWeight.w300,
+            fontSize: 20, 
+            fontWeight: FontWeight.w900,
             color: Colors.black
           )
         ),
@@ -170,7 +169,7 @@ class _EventRowState extends State<EventRow> {
           formattedCountdown, 
           style: const TextStyle(
             fontSize: 25, 
-            fontWeight: FontWeight.w300,
+            fontWeight: FontWeight.w800,
             color: Colors.black
           )
         ),

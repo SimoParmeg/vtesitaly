@@ -61,23 +61,17 @@ class _RulesRowState extends State<RulesRow> {
   List<Widget> _buildItemsWidgets() {
     return [
       const RuleTile(
-        icondata: Icon(
-          Icons.refresh, 
-          color: Colors.white),
+        iconData: Icons.refresh,
         title: "3 Rounds + Final"
       ),
       const SizedBox(height: 20),
       const RuleTile(
-        icondata: Icon(
-          Icons.hourglass_bottom_rounded, 
-          color: Colors.white),
+        iconData: Icons.hourglass_bottom_rounded, 
         title: "2 Hour Time Limit"
       ),
       const SizedBox(height: 20),
       const RuleTile(
-        icondata: Icon(
-          Icons.tab_rounded, 
-          color: Colors.white),
+        iconData: Icons.tab_rounded,
         title: "Proxies NOT allowed"
       ),
     ];
