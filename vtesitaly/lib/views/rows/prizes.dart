@@ -84,7 +84,7 @@ class _PrizesRowState extends State<PrizesRow> {
       PrizeTile(
         title: "PRIZES",
         lines: Map.fromEntries([
-          const MapEntry("Original 'One With the Land' Art, realized by Riccardo Fabiani, for the winner", Icons.filter_1_rounded),
+          const MapEntry("Original 'One With the Land' Art, realized by Riccardo Fabiani", Icons.filter_1_rounded),
           const MapEntry("Commemorative Metal Rings for top 10 players", Icons.panorama_horizontal_select),
           // const MapEntry("Counters by VTES Decks for the finalists", Icons.filter_1_rounded),
           const MapEntry("Sponsorized UltraPro material", Icons.filter_none_rounded),
