@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 40),
             OtherEventsRow(key: widget.keys[3]),
             const SizedBox(height: 40),
-            ContactsRow(key: widget.keys[4])
+            ContactsRow()
           ],
         ),
       ),
