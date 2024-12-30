@@ -116,14 +116,6 @@ class _EventRowState extends State<EventRow> {
           ),
         ),
         const SizedBox(height: 20),
-        const Text(
-          "Subscriptions Available Soon!",
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: Colors.red,
-          ),
-        ),
         GestureDetector(
           onTap: () => _showSubscriptionDialog(context), // Apre il popup
           child: const Text(
