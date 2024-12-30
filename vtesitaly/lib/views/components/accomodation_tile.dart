@@ -54,15 +54,5 @@ class _AccomodationTileState extends State<AccomodationTile> {
     );
   }
 
-  _buildLinkWidget() {
-    return const SizedBox(
-      height: 60,
-      width: 60,
-      child: Icon(
-        Icons.link,
-        color: Colors.blue,
-      ),
-    );
-  }
 
 }
