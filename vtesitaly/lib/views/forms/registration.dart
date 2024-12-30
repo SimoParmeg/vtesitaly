@@ -26,6 +26,8 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
 
   int _subscriptionType = 0; // Default: not selected
 
+
+
   @override
   void dispose() {
     // Dispose controllers and focus nodes
@@ -60,23 +62,24 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
   }
 
   void _sendDataToBackend(Map<String, dynamic> data) async {
-    const backendUrl = "https://vtesitaly.com/api/register";
+    print(data);
+    // const backendUrl = "https://vtesitaly.com/api/register";
 
-    try {
-      final response = await http.post(
-        Uri.parse(backendUrl),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode(data),
-      );
+    // try {
+    //   final response = await http.post(
+    //     Uri.parse(backendUrl),
+    //     headers: {"Content-Type": "application/json"},
+    //     body: jsonEncode(data),
+    //   );
 
-      if (response.statusCode == 200) {
-        print("Registration completed!");
-      } else {
-        print("Server Error: ${response.body}");
-      }
-    } catch (e) {
-      print("Error during connection: $e");
-    }
+    //   if (response.statusCode == 200) {
+    //     print("Registration completed!");
+    //   } else {
+    //     print("Server Error: ${response.body}");
+    //   }
+    // } catch (e) {
+    //   print("Error during connection: $e");
+    // }
   }
 
 
@@ -98,34 +101,38 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextFormField(
+            textInputAction: TextInputAction.next,
             controller: _nameController,
             focusNode: _nameFocus,
             decoration: const InputDecoration(labelText: 'Name *'),
             validator: (value) => value!.isEmpty ? 'Insert name' : null,
             onFieldSubmitted: (_) {
-              FocusScope.of(context).requestFocus(_surnameFocus);
+              FocusScope.of(context).unfocus();
             },
           ),
           TextFormField(
+            textInputAction: TextInputAction.next,
             controller: _surnameController,
             focusNode: _surnameFocus,
             decoration: const InputDecoration(labelText: 'Surname *'),
             validator: (value) => value!.isEmpty ? 'Insert surname' : null,
             onFieldSubmitted: (_) {
-              FocusScope.of(context).requestFocus(_idVeknFocus);
+              FocusScope.of(context).unfocus();
             },
           ),
           TextFormField(
+            textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.number,
             controller: _idVeknController,
             focusNode: _idVeknFocus,
             decoration: const InputDecoration(labelText: 'VEKN ID *'),
-            keyboardType: TextInputType.number,
             validator: (value) => value!.isEmpty ? 'Insert your VEKN ID' : null,
             onFieldSubmitted: (_) {
-              FocusScope.of(context).requestFocus(_emailFocus);
+              FocusScope.of(context).unfocus();
             },
           ),
           TextFormField(
+            textInputAction: TextInputAction.next,
             controller: _emailController,
             focusNode: _emailFocus,
             decoration: const InputDecoration(labelText: 'Email *'),
@@ -133,26 +140,31 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
             validator: (value) =>
                 value!.isEmpty ? 'Insert a valid mail' : null,
             onFieldSubmitted: (_) {
-              FocusScope.of(context).requestFocus(_decklistFocus);
+              FocusScope.of(context).unfocus();
             },
           ),
           TextFormField(
+            textInputAction: TextInputAction.next,
             controller: _decklistController,
             focusNode: _decklistFocus,
             decoration: const InputDecoration(labelText: 'Decklist (optional, you can upload later)'),
             maxLines: 4,
+            onFieldSubmitted: (_) {
+              FocusScope.of(context).unfocus();
+            }
           ),
           DropdownButtonFormField<int>(
             value: _subscriptionType,
             items: const [
-              DropdownMenuItem(value: 0, child: Text("Select Subscription *")),
-              DropdownMenuItem(value: 1, child: Text("Only GP (Saturday), 60€")),
-              DropdownMenuItem(value: 2, child: Text("GP + Redemption Event (Saturday + Sunday), 95€")),
+              DropdownMenuItem(value: 0, child: Text("Select Subscription (all prices are lunch included) *")),
+              DropdownMenuItem(value: 1, child: Text("Italian GP (Saturday), 60€")),
+              DropdownMenuItem(value: 2, child: Text("Italian GP + Redemption Event (Saturday + Sunday), 95€")),
             ],
             onChanged: (value) {
               setState(() {
                 _subscriptionType = value!;
               });
+              FocusScope.of(context).unfocus();
             },
             decoration: const InputDecoration(
               labelText: "",
@@ -165,14 +177,18 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              ElevatedButton(
-                onPressed: _submitForm,
-                child: const Text("Register"),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: _submitForm,
+                  child: const Text("Register"),
+                ),
               ),
               const SizedBox(width: 32),
-              OutlinedButton(
-                onPressed: _cancelForm,
-                child: const Text("Cancel"),
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: _cancelForm,
+                  child: const Text("Cancel"),
+                ),
               ),
             ],
           ),

@@ -204,7 +204,7 @@ class _EventRowState extends State<EventRow> {
         GestureDetector(
           onTap: () => _showSubscriptionDialog(context),
           child: const Text(
-            "Subscriptions Available Soon!",
+            "Subscriptions Available Soon! (all prices are lunch included)",
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,

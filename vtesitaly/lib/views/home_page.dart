@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtesitaly/views/rows/accomodation.dart';
+import 'package:vtesitaly/views/rows/contact.dart';
 import 'package:vtesitaly/views/rows/event.dart';
 import 'package:vtesitaly/views/rows/location.dart';
 import 'package:vtesitaly/views/rows/other_events.dart';
@@ -40,6 +41,8 @@ class _HomePageState extends State<HomePage> {
             AccomodationRow(key: widget.keys[2]),
             const SizedBox(height: 40),
             OtherEventsRow(key: widget.keys[3]),
+            const SizedBox(height: 40),
+            ContactsRow(key: widget.keys[4])
           ],
         ),
       ),
