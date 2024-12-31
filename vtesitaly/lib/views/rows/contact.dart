@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vtesitaly/config.dart';
-import 'package:vtesitaly/views/components/contact_tile.dart';
 import 'package:vtesitaly/views/components/section_title.dart';
 
 class ContactsRow extends StatelessWidget {

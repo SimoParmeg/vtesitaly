@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 // Sostituisci con il tuo file di configurazione o la tua costante
 import 'package:vtesitaly/config.dart';
+import 'package:vtesitaly/views/components/rules_tile.dart';
 import 'package:vtesitaly/views/components/section_title.dart';
 
 class OtherEventsRow extends StatefulWidget {
@@ -34,6 +35,8 @@ class _OtherEventsRowState extends State<OtherEventsRow> {
           const SizedBox(height: 20),
           _buildTitleWidget(),
           const SizedBox(height: 8),
+          _buildTournamentInfo(), // Nuova riga aggiunta
+          const SizedBox(height: 20),
           _buildLinkWidget(),
           const SizedBox(height: 20),
           _buildImageWidget(isMobile),
@@ -49,6 +52,30 @@ class _OtherEventsRowState extends State<OtherEventsRow> {
     );
   }
 
+  Widget _buildTournamentInfo() {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        RuleTile(
+          iconData: Icons.refresh,
+          title: "2 Rounds + Final",
+        ),
+        RuleTile(
+          iconData: Icons.hourglass_bottom_rounded,
+          title: "2 Hour Time Limit",
+        ),
+        RuleTile(
+          iconData: Icons.tab_rounded,
+          title: "Proxies are allowed",
+        ),
+        RuleTile(
+          iconData: Icons.euro,
+          title: "35€ Fee - lunch included",
+        ),
+      ],
+    );
+  }
+
   Widget _buildLinkWidget() {
     return Text.rich(
       TextSpan(
@@ -57,15 +84,14 @@ class _OtherEventsRowState extends State<OtherEventsRow> {
           color: Colors.blue,
           decoration: TextDecoration.underline,
           decorationColor: Colors.blue,
-          fontSize: 30, 
-          fontWeight: FontWeight.w400
+          fontSize: 30,
+          fontWeight: FontWeight.w400,
         ),
         recognizer: TapGestureRecognizer()..onTap = _launchUrl,
-      )
+      ),
     );
   }
 
-  // Widget per l'immagine
   Widget _buildImageWidget(bool isMobile) {
     final double size = !isMobile
         ? min(480, MediaQuery.of(context).size.width / 2 - 32)
@@ -78,7 +104,7 @@ class _OtherEventsRowState extends State<OtherEventsRow> {
         width: size,
         height: size,
         fit: BoxFit.cover,
-      )
+      ),
     );
   }
 }

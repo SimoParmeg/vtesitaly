@@ -36,7 +36,7 @@ class _RulesRowState extends State<RulesRow> {
 
   Widget _buildTitleWidget() {
     return const SectionTitle(
-      title: "Rules",
+      title: "Tournament Infos",
     );
   }
 
@@ -73,6 +73,11 @@ class _RulesRowState extends State<RulesRow> {
       const RuleTile(
         iconData: Icons.tab_rounded,
         title: "Proxies NOT allowed"
+      ),
+      const SizedBox(height: 20),
+      const RuleTile(
+        iconData: Icons.euro,
+        title: "60€ Fee - lunch included"
       ),
     ];
   }
