@@ -41,3 +41,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+
+# PHP
+api/db_connection.php
+api/paypal_tokens.php
