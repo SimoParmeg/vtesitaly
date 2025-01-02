@@ -62,7 +62,7 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
   }
 
   void _sendDataToBackend(Map<String, dynamic> data) async {
-    const backendUrl = "https://vtesitaly.com/api/register.php";
+    const backendUrl = "https://vtesitaly.com/api/check_and_register.php";
 
     try {
       final response = await http.post(
@@ -74,26 +74,23 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
       final result = jsonDecode(response.body);
 
       if (result["status"] == "success") {
-        // Mostra un messaggio di successo
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Registration saved successfully!"))
+          SnackBar(content: Text(result["message"]))
         );
-
-        // Chiudi il form dopo il messaggio di successo
         Navigator.of(context).pop();
       } else {
-        // Mostra un messaggio di errore
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Error: ${result["message"]}"))
         );
       }
     } catch (e) {
-      // Gestione degli errori di connessione
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Connection error: $e"))
       );
     }
   }
+
+
 
 
 
