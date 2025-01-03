@@ -1,5 +1,8 @@
 <?php
 require_once 'db_connection.php';
+require_once 'config.php';
+// require_once 'charge.php';
+
 
 // Connessione al database
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -17,7 +20,7 @@ $surname = $data["surname"];
 $id_vekn = $data["id_vekn"];
 $email = $data["email"];
 $decklist = $data["decklist"];
-$subscription_type = $data["subscription_type"];
+$subscription_type = (int)$data["subscription_type"];
 
 // Controlla se l'utente esiste già
 $sql_check = "SELECT id FROM registrations WHERE id_vekn = ? AND email = ?";
@@ -40,18 +43,35 @@ if ($stmt_check->num_rows > 0) {
 
     $stmt_update->close();
 } else {
-    // Registra nuovo utente nel database
-    $sql_insert = "INSERT INTO registrations (name, surname, id_vekn, email, decklist, subscription_type) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt_insert = $conn->prepare($sql_insert);
-    $stmt_insert->bind_param("sssssi", $name, $surname, $id_vekn, $email, $decklist, $subscription_type);
-
-    if ($stmt_insert->execute()) {
-        echo json_encode(["status" => "success", "message" => "Registration Complete!"]);
+    // EFFETTUA UN PAGAMENTO CON PAYPAL
+    if ($subscription_type == 1) {
+        $price = 60.00;
+    } else if ($subscription_type == 2) {
+        $price = 95.00;
     } else {
-        echo json_encode(["status" => "error", "message" => $stmt_insert->error]);
+        echo json_encode(["status" => "error", "message" => "Bad Parameters"]);
+        return;
     }
 
-    $stmt_insert->close();
+    try {
+        $response = $gateway->purchase(array(
+            'amount' =>  $price,
+            'currency' => PAYPAL_CURRENCY,
+            'returnUrl' => PAYPAL_RETURN_URL,
+            'cancelUrl' => PAYPAL_CANCEL_URL,
+        ))->send();
+
+        if ($response->isRedirect()) {
+            $response->redirect(); // this will automatically forward the customer
+        } else {
+            // not successful
+            echo "sono in else";
+            echo $response->getMessage();
+        }
+    } catch(Exception $e) {
+        echo "sono in catch";
+        echo $e->getMessage();
+    }
 }
 
 // chiudi la connessione
