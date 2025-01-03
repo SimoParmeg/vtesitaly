@@ -187,7 +187,14 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
               Expanded(
                 child: ElevatedButton(
                   onPressed: _submitForm,
-                  child: const Text("Register"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue
+                  ),
+                  child: const Text("Register", style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 32),
