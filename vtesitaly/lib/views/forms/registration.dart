@@ -91,6 +91,23 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
   }
 
 
+  Future<bool> _checkUserRegistration(String email, String idVekn) async {
+  const checkUrl = "https://vtesitaly.com/api/check_and_register.php";
+
+  final response = await http.post(
+    Uri.parse(checkUrl),
+    headers: {"Content-Type": "application/json"},
+    body: jsonEncode({
+      "check_registration": true,
+      "email": email,
+      "id_vekn": idVekn,
+    }),
+  );
+
+  final result = jsonDecode(response.body);
+  return result["is_registered"];
+}
+
 
 
 
