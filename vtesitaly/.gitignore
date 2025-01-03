@@ -45,3 +45,4 @@ app.*.map.json
 # PHP
 api/db_connection.php
 api/paypal_tokens.php
+api/config.php
