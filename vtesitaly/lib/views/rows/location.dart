@@ -98,10 +98,10 @@ class _LocationRowState extends State<LocationRow> {
   
   Widget _buildColumnWidget(bool isMobile) {
     return SizedBox(
-      height: 350,
+      height: 400,
       width: !isMobile ? 480 : MediaQuery.of(context).size.width,
       child: const Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [

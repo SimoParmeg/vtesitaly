@@ -102,7 +102,7 @@ class _EventRowState extends State<EventRow> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildColumnWidget(),
+        Flexible(child: _buildColumnWidget()),
         _buildImageWidget(isMobile),
         
       ]
@@ -112,7 +112,7 @@ class _EventRowState extends State<EventRow> {
       children: [
         _buildImageWidget(isMobile),
         const SizedBox(height:20),
-        _buildColumnWidget()        
+        _buildColumnWidget()
       ]
     );
 

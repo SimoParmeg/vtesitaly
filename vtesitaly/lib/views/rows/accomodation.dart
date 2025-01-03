@@ -35,7 +35,7 @@ class _AccomodationRowState extends State<AccomodationRow> {
         ),
       ],
     ) : Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildTitleWidget(),

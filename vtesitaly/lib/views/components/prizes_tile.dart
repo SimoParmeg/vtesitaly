@@ -33,6 +33,7 @@ class _PrizeTileState extends State<PrizeTile> {
           child: ListTile(
             title: Text(
               widget.title,
+              softWrap: true,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.black,
@@ -45,6 +46,7 @@ class _PrizeTileState extends State<PrizeTile> {
                 .map((entry) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         height: 40,
@@ -59,10 +61,15 @@ class _PrizeTileState extends State<PrizeTile> {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      Text(
-                        entry.key,
-                        style: const TextStyle(
-                          color: Colors.black,
+                      Expanded(
+                        child: Text(
+                          entry.key,
+                          softWrap: true,
+                          maxLines: null,
+                          overflow: TextOverflow.visible,
+                          style: const TextStyle(
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ],

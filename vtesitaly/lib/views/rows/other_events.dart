@@ -34,8 +34,8 @@ class _OtherEventsRowState extends State<OtherEventsRow> {
         children: [
           const SizedBox(height: 20),
           _buildTitleWidget(),
-          const SizedBox(height: 8),
-          _buildTournamentInfo(), // Nuova riga aggiunta
+          const SizedBox(height: 20),
+          _buildTournamentInfo(isMobile),
           const SizedBox(height: 20),
           _buildLinkWidget(),
           const SizedBox(height: 20),
@@ -52,28 +52,42 @@ class _OtherEventsRowState extends State<OtherEventsRow> {
     );
   }
 
-  Widget _buildTournamentInfo() {
-    return const Row(
+  Widget _buildTournamentInfo(bool isMobile) {
+    if (!isMobile) {
+      return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        RuleTile(
-          iconData: Icons.refresh,
-          title: "2 Rounds + Final",
-        ),
-        RuleTile(
-          iconData: Icons.hourglass_bottom_rounded,
-          title: "2 Hour Time Limit",
-        ),
-        RuleTile(
-          iconData: Icons.tab_rounded,
-          title: "Proxies are allowed",
-        ),
-        RuleTile(
-          iconData: Icons.euro,
-          title: "35€ Fee - lunch included",
-        ),
-      ],
+      children: _buildTournamentItems(),
     );
+    } else {
+      return SizedBox(
+        height: 300,
+        child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: _buildTournamentItems(),
+            ),
+      );
+    }
+  }
+
+  List<Widget> _buildTournamentItems() {
+    return const [
+      RuleTile(
+        iconData: Icons.refresh,
+        title: "2 Rounds + Final",
+      ),
+      RuleTile(
+        iconData: Icons.hourglass_bottom_rounded,
+        title: "2 Hour Time Limit",
+      ),
+      RuleTile(
+        iconData: Icons.tab_rounded,
+        title: "Proxies are allowed",
+      ),
+      RuleTile(
+        iconData: Icons.euro,
+        title: "35€ Fee - lunch included",
+      ),
+    ];
   }
 
   Widget _buildLinkWidget() {
