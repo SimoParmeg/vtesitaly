@@ -1,6 +1,6 @@
 # vtesitaly
 
-A new Flutter project.
+Italian game community about Vampire the Eternal Struggle
 
 ## Getting Started
 
