@@ -34,8 +34,8 @@ if (isset($_SESSION['user_data'])) {
 
         Here are the details of your registration:
         
-        name: $name 
-        surname: $surname
+        Name: $name 
+        Surname: $surname
         VEKN ID: $id_vekn
         Email: $email
         Subscription: " . ($subscription_type == 1 ? "GP Saturday" : "GP Saturday + Redemption Event Sunday") . "
@@ -48,27 +48,33 @@ if (isset($_SESSION['user_data'])) {
         Bleed for 9, see you in Modena
         Vtes Italy
         ";
-        $headers = "From: 	info@vtesitaly.com\r\n" .
+        $headers = "From: info@vtesitaly.com\r\n" .
                    "Reply-To: info@vtesitaly.com\r\n" .
                    "Content-Type: text/plain; charset=UTF-8";
 
-        if (mail($email, $subject, $message, $headers)) {
-            echo json_encode(["status" => "success", "message" => "Registration Complete!"]);
+        if (mail($email, $subject, strip_tags($message), $headers)) {
+            echo "
+            <html>
+            <head>
+                <title>Registration Confirmed</title>
+            </head>
+            <body style='font-family: Arial, sans-serif; margin: 20px;'>
+                <h2>Registration Complete!</h2>
+                <p>Your registration for GP Modena 2025 has been successfully completed.</p>
+                <p style='white-space: pre-line;'>$message</p>
+            </body>
+            </html>
+            ";
         } else {
             echo json_encode(["status" => "error", "message" => "Email sending failed."]);
         }
-
-        // Logica per chiudere il tab corrente
-        echo '<script>window.close();</script>';
-
     } else {
-        echo json_encode(["status" => "error", "message" => $stmt_insert->error]);
+        // Gestione errore inserimento nel database
+        echo json_encode(["status" => "error", "message" => "Failed to register user in the database."]);
     }
-
-    $stmt_insert->close();
 } else {
-    echo json_encode(["status" => "error", "message" => "Session data not found."]);
+    // Gestione sessione non trovata
+    echo json_encode(["status" => "error", "message" => "User session data not found."]);
 }
 
-$conn->close();
 ?>

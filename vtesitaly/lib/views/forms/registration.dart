@@ -77,15 +77,34 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
         final result = jsonDecode(response.body);
 
         if (result["status"] == "success") {
+        // Mostra un messaggio di successo
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(result["message"])),
+            SnackBar(
+            content: Text(result["message"]),
+            duration: const Duration(seconds: 5), // Messaggio visibile per 5 secondi
+            ),
         );
-        Navigator.of(context).pop();
+
+        // Ritarda la chiusura del form
+        await Future.delayed(const Duration(seconds: 5));
+        Navigator.of(context).pop(); // Chiudi il form
         } else if (result["status"] == "redirect") {
         // Reindirizzamento a PayPal
         final url = result["url"];
         if (await canLaunchUrl(Uri.parse(url))) {
             await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+
+            // Mostra messaggio dopo il pagamento
+            ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text("Payment completed. Registration confirmed!"),
+                duration: Duration(seconds: 5),
+            ),
+            );
+
+            // Ritarda la chiusura del form
+            await Future.delayed(const Duration(seconds: 5));
+            Navigator.of(context).pop(); // Chiudi il form
         } else {
             ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Could not launch URL")),
@@ -102,6 +121,8 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
         );
     }
   }
+
+
 
 
   void _cancelForm() {
