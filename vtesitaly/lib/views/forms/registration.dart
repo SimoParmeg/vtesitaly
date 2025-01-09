@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:url_launcher/url_launcher.dart';
 
 class SubscriptionForm extends StatefulWidget {
   const SubscriptionForm({super.key});
@@ -61,34 +62,47 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
     }
   }
 
+
+
   void _sendDataToBackend(Map<String, dynamic> data) async {
     const backendUrl = "https://vtesitaly.com/api/check_and_register.php";
 
     try {
-      final response = await http.post(
+        final response = await http.post(
         Uri.parse(backendUrl),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(data),
-      );
+        );
 
-      final result = jsonDecode(response.body);
+        final result = jsonDecode(response.body);
 
-      if (result["status"] == "success") {
+        if (result["status"] == "success") {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(result["message"]))
+            SnackBar(content: Text(result["message"])),
         );
         Navigator.of(context).pop();
-      } else {
+        } else if (result["status"] == "redirect") {
+        // Reindirizzamento a PayPal
+        final url = result["url"];
+        if (await canLaunchUrl(Uri.parse(url))) {
+            await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+        } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Could not launch URL")),
+            );
+        }
+        } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Error: ${result["message"]}"))
+            SnackBar(content: Text("Error: ${result["message"]}")),
         );
-      }
+        }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Connection error: $e"))
-      );
+        ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Connection error: $e")),
+        );
     }
   }
+
 
   void _cancelForm() {
     // Clear all fields and return to the previous screen

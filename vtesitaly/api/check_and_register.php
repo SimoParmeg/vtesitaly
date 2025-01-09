@@ -1,13 +1,19 @@
 <?php
-require_once 'db_connection.php';
 require_once 'config.php';
-// require_once 'charge.php';
+// Abilita CORS
+header("Access-Control-Allow-Origin: *"); // Oppure specifica il dominio
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Max-Age: 86400"); // Cache della preflight
 
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 
 // Connessione al database
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Controlla la connessione
 if ($conn->connect_error) {
     die("Connessione al database fallita: " . $conn->connect_error);
 }
@@ -62,14 +68,12 @@ if ($stmt_check->num_rows > 0) {
         ))->send();
 
         if ($response->isRedirect()) {
-            $response->redirect(); // this will automatically forward the customer
+            echo json_encode(["status" => "redirect", "url" => $response->getRedirectUrl()]);
         } else {
-            // not successful
-            echo "sono in else";
-            echo $response->getMessage();
+            // Non è riuscita
+            echo json_encode(["status" => "error", "message" => $response->getMessage()]);
         }
     } catch(Exception $e) {
-        echo "sono in catch";
         echo $e->getMessage();
     }
 }

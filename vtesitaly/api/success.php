@@ -12,6 +12,8 @@ if ($stmt_insert->execute()) {
     echo json_encode(["status" => "error", "message" => $stmt_insert->error]);
 }
 
+// mando una mail di avvenuta registrazione
+
 $stmt_insert->close();
 
 ?>
