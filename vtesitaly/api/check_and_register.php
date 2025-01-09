@@ -1,21 +1,17 @@
 <?php
+require_once 'conn.php';
 require_once 'config.php';
+session_start();
+
 // Abilita CORS
-header("Access-Control-Allow-Origin: *"); // Oppure specifica il dominio
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Access-Control-Max-Age: 86400"); // Cache della preflight
+header("Access-Control-Max-Age: 86400");
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
-}
-
-// Connessione al database
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connessione al database fallita: " . $conn->connect_error);
 }
 
 // Ottieni i dati dal POST
@@ -43,42 +39,60 @@ if ($stmt_check->num_rows > 0) {
 
     if ($stmt_update->execute()) {
         echo json_encode(["status" => "success", "message" => "Decklist Updated!"]);
+        $stmt_update->close();
+        $stmt_check->close();
+        $conn->close();
+        exit();
     } else {
         echo json_encode(["status" => "error", "message" => $stmt_update->error]);
+        $stmt_update->close();
+        $stmt_check->close();
+        $conn->close();
+        exit();
     }
 
-    $stmt_update->close();
+
 } else {
-    // EFFETTUA UN PAGAMENTO CON PAYPAL
+    // Effettua un pagamento con PayPal
     if ($subscription_type == 1) {
         $price = 60.00;
-    } else if ($subscription_type == 2) {
+    } elseif ($subscription_type == 2) {
         $price = 95.00;
     } else {
         echo json_encode(["status" => "error", "message" => "Bad Parameters"]);
-        return;
+        $stmt_check->close();
+        $conn->close();
+        exit();
     }
 
+    // Salva i dati nella sessione
+    $_SESSION['user_data'] = [
+        'name' => $name,
+        'surname' => $surname,
+        'id_vekn' => $id_vekn,
+        'email' => $email,
+        'decklist' => $decklist,
+        'subscription_type' => $subscription_type
+    ];
+
     try {
-        $response = $gateway->purchase(array(
-            'amount' =>  $price,
+        $response = $gateway->purchase([
+            'amount' => $price,
             'currency' => PAYPAL_CURRENCY,
             'returnUrl' => PAYPAL_RETURN_URL,
             'cancelUrl' => PAYPAL_CANCEL_URL,
-        ))->send();
+        ])->send();
 
         if ($response->isRedirect()) {
             echo json_encode(["status" => "redirect", "url" => $response->getRedirectUrl()]);
         } else {
-            // Non è riuscita
             echo json_encode(["status" => "error", "message" => $response->getMessage()]);
         }
-    } catch(Exception $e) {
-        echo $e->getMessage();
+    } catch (Exception $e) {
+        echo json_encode(["status" => "error", "message" => $e->getMessage()]);
     }
 }
 
-// chiudi la connessione
 $stmt_check->close();
 $conn->close();
 ?>

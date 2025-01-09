@@ -46,3 +46,4 @@ app.*.map.json
 api/db_connection.php
 api/paypal_tokens.php
 api/config.php
+api/conn.php

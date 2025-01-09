@@ -1,5 +1,5 @@
 <?php
-require_once 'check_and_register.php';
+require_once 'conn.php';
 
 echo json_encode(["status" => "error", "message" => "Payment failed"]);
 
