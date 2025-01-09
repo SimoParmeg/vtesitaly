@@ -38,7 +38,53 @@ if ($stmt_check->num_rows > 0) {
     $stmt_update->bind_param("ss", $decklist, $id_vekn);
 
     if ($stmt_update->execute()) {
-        echo json_encode(["status" => "success", "message" => "Decklist Updated!"]);
+        // prendi i dati della registrazione già presenti a database
+        $sql_check2 = "SELECT name, surname, id_vekn, email, decklist, subscription_type
+                      FROM registrations 
+                      WHERE id_vekn = ? AND email = ?";
+        $stmt_check2 = $conn->prepare($sql_check2);
+        $stmt_check2->bind_param("ss", $id_vekn, $email);
+        $stmt_check2->execute();
+        $stmt_check2->bind_result($name, $surname, $id_vekn, $email, $decklist, $subscription_type);
+        $stmt_check2->fetch();
+
+        // Logica per comunicazione via mail di avvenuta registrazione
+        $subject = "GP Modena 2025 - Decklist updated";
+        $message = "
+        Hello fellow Metuselah,
+
+        This is to confirm you we updated 
+        the decklist on our system.
+        We will consider valid only the last 
+        decklist subscribed.
+
+
+        Here are the details of your registration:
+        
+        name: $name 
+        surname: $surname
+        VEKN ID: $id_vekn
+        Email: $email
+        Subscription: " . ($subscription_type == 1 ? "GP Saturday" : "GP Saturday + Redemption Event Sunday") . "
+        
+        Your Decklist:
+        $decklist
+
+        Don't hesitate to contact us 
+        if you need clarifications.
+
+        Bleed for 9, see you in Modena
+        Vtes Italy
+        ";
+        $headers = "From: 	info@vtesitaly.com\r\n" .
+                "Reply-To: info@vtesitaly.com\r\n" .
+                "Content-Type: text/plain; charset=UTF-8";
+
+        if (mail($email, $subject, $message, $headers)) {
+            echo json_encode(["status" => "success", "message" => "Registration Complete!"]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Email sending failed."]);
+        }
         $stmt_update->close();
         $stmt_check->close();
         $conn->close();

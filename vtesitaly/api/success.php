@@ -18,7 +18,49 @@ if (isset($_SESSION['user_data'])) {
     $stmt_insert->bind_param("sssssi", $name, $surname, $id_vekn, $email, $decklist, $subscription_type);
 
     if ($stmt_insert->execute()) {
-        echo json_encode(["status" => "success", "message" => "Registration Complete!"]);
+        // Logica per comunicazione via mail di avvenuta registrazione
+        $subject = "GP Modena 2025 - Registration confirmed";
+        $message = "
+        Hello fellow Metuselah,
+
+        Thanks for registering to GP Modena 2025.
+
+        If you registered without a valid decklist it's fine, 
+        just remember to upload the decklist 12 hours before the tournament starts.
+        To change your decklist you can re-compile the form using the same vekn and email (see below), 
+        in this case your decklist will be updated and you will not charged for subscription again.
+        We will consider valid only the last decklist subscribed.
+
+
+        Here are the details of your registration:
+        
+        name: $name 
+        surname: $surname
+        VEKN ID: $id_vekn
+        Email: $email
+        Subscription: " . ($subscription_type == 1 ? "GP Saturday" : "GP Saturday + Redemption Event Sunday") . "
+        
+        Your Decklist:
+        $decklist
+
+        Don't hesitate to contact us if you need clarifications.
+
+        Bleed for 9, see you in Modena
+        Vtes Italy
+        ";
+        $headers = "From: 	info@vtesitaly.com\r\n" .
+                   "Reply-To: info@vtesitaly.com\r\n" .
+                   "Content-Type: text/plain; charset=UTF-8";
+
+        if (mail($email, $subject, $message, $headers)) {
+            echo json_encode(["status" => "success", "message" => "Registration Complete!"]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Email sending failed."]);
+        }
+
+        // Logica per chiudere il tab corrente
+        echo '<script>window.close();</script>';
+
     } else {
         echo json_encode(["status" => "error", "message" => $stmt_insert->error]);
     }
