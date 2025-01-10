@@ -204,7 +204,7 @@ class _EventRowState extends State<EventRow> {
         GestureDetector(
           onTap: () => _showSubscriptionDialog(context),
           child: const Text(
-            "Subscriptions Available Soon! (all prices are lunch included)",
+            "Subscribe Here! (all prices are lunch included)",
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
@@ -212,6 +212,60 @@ class _EventRowState extends State<EventRow> {
               decoration: TextDecoration.underline,
             ),
           ),
+        ),
+        const SizedBox(
+          height: 20
+        ),
+        const Text(
+          "Pre-registrations are opened until 16th February 2025.", 
+          style: TextStyle(
+            fontSize: 20, 
+            fontWeight: FontWeight.w700,
+            color: Colors.red
+          )
+        ),
+        const Text(
+          "After this date we will open a second registration at higher prices.", 
+          style: TextStyle(
+            fontSize: 20, 
+            fontWeight: FontWeight.w700,
+            color: Colors.red
+          )
+        ),
+        const Text(
+          "End of registrations: February 22, 2025. it will not be possible to register later", 
+          style: TextStyle(
+            fontSize: 20, 
+            fontWeight: FontWeight.w700,
+            color: Colors.red
+          )
+        ),
+        const SizedBox(
+          height: 20
+        ),
+        const Text(
+          "If you want to update your decklist, re-compile the form, ", 
+          style: TextStyle(
+            fontSize: 20, 
+            fontWeight: FontWeight.w700,
+            color: Colors.red
+          )
+        ),
+        const Text(
+          "you will not be charged again and your decklist will be updated. ", 
+          style: TextStyle(
+            fontSize: 20, 
+            fontWeight: FontWeight.w700,
+            color: Colors.red
+          )
+        ),
+        const Text(
+          "We'll keep only the last decklist subscribed", 
+          style: TextStyle(
+            fontSize: 20, 
+            fontWeight: FontWeight.w700,
+            color: Colors.red
+          )
         ),
       ],
     );
