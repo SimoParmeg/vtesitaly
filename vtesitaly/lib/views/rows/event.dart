@@ -20,6 +20,8 @@ class _EventRowState extends State<EventRow> {
   final DateTime _targetDateTime = DateTime(2025, 3, 1, 9, 30, 0);
   String formattedCountdown = "";
 
+  bool mouseOverSubscribe = false;
+
 
   @override
   void initState() {
@@ -84,7 +86,7 @@ class _EventRowState extends State<EventRow> {
             child: SingleChildScrollView(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
-                child: const SubscriptionForm(), // Mostra il modulo
+                child: const SubscriptionForm(),
               ),
             ),
           ),
@@ -203,13 +205,27 @@ class _EventRowState extends State<EventRow> {
         // 
         GestureDetector(
           onTap: () => _showSubscriptionDialog(context),
-          child: const Text(
-            "Subscribe Here! (all prices are lunch included)",
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              color: Colors.blue,
-              decoration: TextDecoration.underline,
+          child: MouseRegion(
+            onEnter: (_) {
+              setState(() {
+                mouseOverSubscribe = true;
+              });
+            },
+            onExit: (_) {
+              setState(() {
+                mouseOverSubscribe = false;
+              });
+            },
+            cursor: SystemMouseCursors.click,
+            child: Text(
+              "Subscribe Here! (all prices are lunch included)",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+                decoration: mouseOverSubscribe ? TextDecoration.underline : TextDecoration.none,
+                decorationColor: Colors.blue
+              ),
             ),
           ),
         ),
@@ -217,7 +233,7 @@ class _EventRowState extends State<EventRow> {
           height: 20
         ),
         const Text(
-          "Pre-registrations are opened until 16th February 2025.", 
+          "Pre-registrations are opened until 16th February 2025.\nAfter this date we will open a second registration at higher prices.", 
           style: TextStyle(
             fontSize: 20, 
             fontWeight: FontWeight.w700,
@@ -278,10 +294,10 @@ class _EventRowState extends State<EventRow> {
         "assets/images/logo_gp.png",
         width: !isMobile 
           ? min(475, MediaQuery.of(context).size.width/2-32) 
-          : MediaQuery.of(context).size.width-32,
+          : MediaQuery.of(context).size.width-64,
         height: !isMobile 
           ? min(475, MediaQuery.of(context).size.width/2-32) 
-          : MediaQuery.of(context).size.width-32,
+          : MediaQuery.of(context).size.width-64,
         fit: BoxFit.cover,
       )
     );
