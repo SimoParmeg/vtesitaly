@@ -55,35 +55,26 @@ if ($stmt_check->num_rows > 0) {
 
         // Logica per comunicazione via mail di avvenuta registrazione
         $subject = "GP Modena 2025 - Decklist updated";
-        $message = "
-        Hello fellow Metuselah,
 
-        This is to confirm you we updated 
-        the decklist on our system.
-        We will consider valid only the last 
-        decklist subscribed.
-
-
-        Here are the details of your registration:
+        $message = "Hello fellow Metuselah,\n\n" .
+            "This is to confirm that we updated your decklist in our system. " .
+            "We will only consider valid the last decklist you submitted.\n\n" .
+            "Here are the details of your registration:\n\n" .
+            "Name: $name\n" .
+            "Surname: $surname\n" .
+            "VEKN ID: $id_vekn\n" .
+            "Email: $email\n" .
+            "Subscription: " . ($subscription_type == 1 ? "GP Saturday" : "GP Saturday + Redemption Event Sunday") . "\n\n" .
+            "Your Decklist:\n" .
+            "$decklist\n\n" .
+            "Don't hesitate to contact us if you need clarifications.\n\n" .
+            "Bleed for 9, see you in Modena.\n\n" .
+            "Best regards,\n" .
+            "Vtes Italy";
         
-        name: $name 
-        surname: $surname
-        VEKN ID: $id_vekn
-        Email: $email
-        Subscription: " . ($subscription_type == 1 ? "GP Saturday" : "GP Saturday + Redemption Event Sunday") . "
-        
-        Your Decklist:
-        $decklist
-
-        Don't hesitate to contact us 
-        if you need clarifications.
-
-        Bleed for 9, see you in Modena
-        Vtes Italy
-        ";
-        $headers = "From: 	info@vtesitaly.com\r\n" .
-                "Reply-To: info@vtesitaly.com\r\n" .
-                "Content-Type: text/plain; charset=UTF-8";
+        $headers = "From: info@vtesitaly.com\r\n" .
+            "Reply-To: info@vtesitaly.com\r\n" .
+            "Content-Type: text/plain; charset=UTF-8";
 
         if (mail($email, $subject, $message, $headers)) {
             echo json_encode(["status" => "success", "message" => "Registration Complete!"]);
