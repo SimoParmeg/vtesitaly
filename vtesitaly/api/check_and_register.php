@@ -43,14 +43,15 @@ if ($stmt_check->num_rows > 0) {
 
     if ($stmt_update->execute()) {
         // prendi i dati della registrazione già presenti a database
-        $sql_check2 = "SELECT name, surname, id_vekn, email, decklist, subscription_type
+        $sql_check2 = "SELECT name, surname, id_vekn, email, subscription_type
                       FROM registrations 
                       WHERE id_vekn = ? AND email = ?";
         $stmt_check2 = $conn->prepare($sql_check2);
         $stmt_check2->bind_param("ss", $id_vekn, $email);
         $stmt_check2->execute();
-        $stmt_check2->bind_result($name, $surname, $id_vekn, $email, $decklist, $subscription_type);
+        $stmt_check2->bind_result($name, $surname, $id_vekn, $email, $subscription_type);
         $stmt_check2->fetch();
+
 
         // Logica per comunicazione via mail di avvenuta registrazione
         $subject = "GP Modena 2025 - Decklist updated";
