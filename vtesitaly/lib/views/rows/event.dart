@@ -161,7 +161,7 @@ class _EventRowState extends State<EventRow> {
           style: TextStyle(
             fontSize: 20, 
             fontWeight: FontWeight.w900,
-            color: Colors.black.withOpacity(0.6)
+            color: Colors.black.withValues(alpha: 0.6)
           )
         ),
         const SizedBox(
@@ -233,7 +233,7 @@ class _EventRowState extends State<EventRow> {
           )
         ),
         const Text(
-          "End of registrations: February 22, 2025. it will not be possible to register later", 
+          "End of registrations: February 22, 2025. It will not be possible to register later", 
           style: TextStyle(
             fontSize: 20, 
             fontWeight: FontWeight.w700,
@@ -275,7 +275,7 @@ class _EventRowState extends State<EventRow> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: Image.asset(
-        "assets/images/logo_gp.jpeg",
+        "assets/images/logo_gp.png",
         width: !isMobile 
           ? min(475, MediaQuery.of(context).size.width/2-32) 
           : MediaQuery.of(context).size.width-32,
