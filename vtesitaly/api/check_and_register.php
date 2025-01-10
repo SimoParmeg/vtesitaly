@@ -1,6 +1,7 @@
 <?php
 require_once 'conn.php';
 require_once 'config.php';
+require_once 'save_decklist.php';
 session_start();
 
 // Abilita CORS
@@ -33,9 +34,12 @@ $stmt_check->store_result();
 
 if ($stmt_check->num_rows > 0) {
     // Se l'utente esiste, aggiorna solo la decklist
+
+    $decklist_filename = save_decklist_to_file($decklist, $id_vekn, $name, $surname);
+
     $sql_update = "UPDATE registrations SET decklist = ? WHERE id_vekn = ?";
     $stmt_update = $conn->prepare($sql_update);
-    $stmt_update->bind_param("ss", $decklist, $id_vekn);
+    $stmt_update->bind_param("ss",  $decklist_filename, $id_vekn);
 
     if ($stmt_update->execute()) {
         // prendi i dati della registrazione già presenti a database
