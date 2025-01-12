@@ -244,7 +244,7 @@ class _EventRowState extends State<EventRow> {
           height: 20
         ),
         const Text(
-          """If you want to update your decklist, re-compile the form,\n you will not be charged again and your decklist will be updated.\nWe'll keep only the last decklist subscribed""", 
+          """If you want to update your decklist, re-compile the form,\nyou will not be charged again and your decklist will be updated.\nWe'll keep only the last decklist subscribed""", 
           style: TextStyle(
             fontSize: 16, 
             fontWeight: FontWeight.w700,
