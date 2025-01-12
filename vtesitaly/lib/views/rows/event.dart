@@ -233,7 +233,7 @@ class _EventRowState extends State<EventRow> {
           height: 20
         ),
         const Text(
-          """Pre-registrations are opened until 16th February 2025.\nAfter this date we will open a second registration at higher prices.\n\nEnd of registrations: February 22, 2025. It will not be possible to register later""", 
+          """Pre-registrations are opened until 16th February 2025.\nAfter this date we will open a second registration at higher prices.\n\nEnd of registrations: February 22nd, 2025. It will not be possible to register later""", 
           style: TextStyle(
             fontSize: 20, 
             fontWeight: FontWeight.w700,
@@ -245,6 +245,17 @@ class _EventRowState extends State<EventRow> {
         ),
         const Text(
           """If you want to update your decklist, re-compile the form,\n you will not be charged again and your decklist will be updated.\nWe'll keep only the last decklist subscribed""", 
+          style: TextStyle(
+            fontSize: 20, 
+            fontWeight: FontWeight.w700,
+            color: Colors.red
+          )
+        ),
+                const SizedBox(
+          height: 20
+        ),
+        const Text(
+          """REFUNDING POLICY: we will refund your subscription until 16th february,\nget in touch with us in case.\nAfter 16th February we'll not refund 25€ for lunch fee""", 
           style: TextStyle(
             fontSize: 20, 
             fontWeight: FontWeight.w700,

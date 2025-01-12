@@ -75,7 +75,7 @@ class _PrizesRowState extends State<PrizesRow> {
         lines: Map.fromEntries([
           const MapEntry("Grand Prix circuit playmat", Icons.tab_rounded),
           const MapEntry("Grand Prix circuit promo card", Icons.calendar_view_month_outlined),
-          // const MapEntry("Commemorative Edge", Icons.refresh),
+          const MapEntry("Other gifts TBA soon", Icons.calendar_view_month_outlined),
           // const MapEntry("Pack of cards (see image below)", Icons.calendar_view_month_outlined),
           // const MapEntry("Edge sponsored by VTES Decks", Icons.refresh),
         ]),

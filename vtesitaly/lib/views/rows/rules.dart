@@ -67,7 +67,7 @@ class _RulesRowState extends State<RulesRow> {
       const SizedBox(height: 20),
       const RuleTile(
         iconData: Icons.hourglass_bottom_rounded, 
-        title: "2 Hour Time Limit"
+        title: "2 Hours Time Limit"
       ),
       const SizedBox(height: 20),
       const RuleTile(

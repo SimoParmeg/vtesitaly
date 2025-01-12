@@ -77,7 +77,7 @@ class _OtherEventsRowState extends State<OtherEventsRow> {
       ),
       RuleTile(
         iconData: Icons.hourglass_bottom_rounded,
-        title: "2 Hour Time Limit",
+        title: "2 Hours Time Limit",
       ),
       RuleTile(
         iconData: Icons.tab_rounded,
