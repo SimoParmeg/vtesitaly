@@ -8,12 +8,12 @@ if (isset($_GET['paymentId']) && isset($_GET['PayerID'])) {
     if (isset($_SESSION['user_data'])) {
         $user_data = $_SESSION['user_data'];
 
-        $name = $user_data['name'];
-        $surname = $user_data['surname'];
-        $id_vekn = $user_data['id_vekn'];
-        $email = $user_data['email'];
-        $decklist = $user_data['decklist'];
-        $subscription_type = $user_data['subscription_type'];
+        $name = trim($user_data['name']);
+        $surname = trim($user_data['surname']);
+        $id_vekn = trim($user_data['id_vekn']);
+        $email = trim($user_data['email']);
+        $decklist = trim($user_data['decklist']);
+        $subscription_type = trim($user_data['subscription_type']);
 
         try {
             // Ottieni i parametri di ritorno da PayPal
