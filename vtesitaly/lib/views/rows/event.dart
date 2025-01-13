@@ -244,7 +244,7 @@ class _EventRowState extends State<EventRow> {
           height: 20
         ),
         const Text(
-          """If you want to update your decklist, re-compile the form,\nyou will not be charged again and your decklist will be updated.\nWe'll keep only the last decklist subscribed""", 
+          """DECKLIST SUBMISSION:\nyou can subscribe without decklist. However, you need to submit your decklist 12hrs before the event\nTo do so, click on subscribe again and compile the form with the same vekn id and email\nWe'll keep only the last decklist subscribed""", 
           style: TextStyle(
             fontSize: 16, 
             fontWeight: FontWeight.w700,
