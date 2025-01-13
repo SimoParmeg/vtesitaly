@@ -196,11 +196,30 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
             }
           ),
           DropdownButtonFormField<int>(
+            isExpanded: true,
             value: _subscriptionType,
             items: const [
-              DropdownMenuItem(value: 0, child: Text("Select Subscription (all prices are lunch included) *")),
-              DropdownMenuItem(value: 1, child: Text("Italian GP (Saturday), 60€")),
-              DropdownMenuItem(value: 2, child: Text("Italian GP + Redemption Event (Saturday + Sunday), 95€")),
+              DropdownMenuItem(
+                value: 0, 
+                child: Text(
+                  overflow: TextOverflow.ellipsis, 
+                  "Select Subscription (all prices are lunch included) *"
+                )
+              ),
+              DropdownMenuItem(
+                value: 1, 
+                child: Text(
+                  overflow: TextOverflow.ellipsis, 
+                  "Italian GP (Saturday), 60€"
+                )
+              ),
+              DropdownMenuItem(
+                value: 2, 
+                child: Text(
+                  overflow: TextOverflow.ellipsis, 
+                  "Italian GP + Redemption Event (Saturday + Sunday), 95€"
+                )
+              ),
             ],
             onChanged: (value) {
               setState(() {
