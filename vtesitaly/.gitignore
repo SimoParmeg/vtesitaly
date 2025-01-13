@@ -47,3 +47,5 @@ api/db_connection.php
 api/paypal_tokens.php
 api/config.php
 api/conn.php
+api/vendor
+api/composer.*
