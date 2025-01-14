@@ -74,7 +74,7 @@ class _LocationRowState extends State<LocationRow> {
         text: const TextSpan(
           children: [
             TextSpan(
-              text: "Discounted Reservations: ",
+              text: "Discounted Reservations (compile the module using code 'VTES25'): ",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 27,
