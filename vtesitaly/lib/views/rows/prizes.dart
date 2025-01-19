@@ -70,7 +70,8 @@ class _PrizesRowState extends State<PrizesRow> {
         lines: Map.fromEntries([
           const MapEntry("Grand Prix circuit playmat", Icons.tab_rounded),
           const MapEntry("Grand Prix circuit promo card", Icons.calendar_view_month_outlined),
-          const MapEntry("Other gifts TBA soon", Icons.calendar_view_month_outlined),
+          const MapEntry("Custom pens", Icons.border_color_outlined),
+          
         ]),
       ),
       const SizedBox(height: 20),
@@ -78,9 +79,9 @@ class _PrizesRowState extends State<PrizesRow> {
         title: "PRIZES",
         lines: Map.fromEntries([
           const MapEntry("Original 'One With the Land' Art, realized by Riccardo Fabiani", Icons.filter_1_rounded),
-          const MapEntry("Commemorative Metal Rings for top 10 players", Icons.panorama_horizontal_select),
+          const MapEntry("Commemorative Metal Rings for top 10 players", Icons.diamond_outlined),
           const MapEntry("Sponsorized UltraPro material", Icons.filter_none_rounded),
-          const MapEntry("Special prize TBA for the third round winners", Icons.calendar_view_month_outlined),
+          const MapEntry("3rd Round's Winners will bring home a timer", Icons.alarm_outlined),
         ]),
       ),
     ];
@@ -89,7 +90,10 @@ class _PrizesRowState extends State<PrizesRow> {
   Widget _buildCarouselSlider() {
     final List<String> imagePaths = [
       "assets/images/prizes/event1.jpeg",
+      "assets/images/prizes/prizes1.jpeg",
+      "assets/images/prizes/prizes2.jpeg",
       "assets/images/prizes/event2.jpeg",
+      "assets/images/prizes/prizes3.jpeg",
       "assets/images/prizes/event3.jpeg",
     ];
 
@@ -100,17 +104,17 @@ class _PrizesRowState extends State<PrizesRow> {
           child: Image.asset(
             imagePath,
             width: MediaQuery.of(context).size.width - 32,
-            height: 300,
-            fit: BoxFit.cover,
+            height: 600,
+            fit: BoxFit.contain,
           ),
         );
       }).toList(),
       options: CarouselOptions(
-        height: 300,
+        height: 600,
         enlargeCenterPage: true,
         autoPlay: true,
         autoPlayInterval: const Duration(seconds: 3),
-        autoPlayAnimationDuration: const Duration(milliseconds: 800),
+        autoPlayAnimationDuration: const Duration(milliseconds: 1200),
         aspectRatio: 16 / 9,
         viewportFraction: 0.8,
       ),
