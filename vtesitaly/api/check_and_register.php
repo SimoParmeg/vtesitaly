@@ -4,8 +4,13 @@ require_once 'config.php';
 require_once 'save_decklist.php';
 session_start();
 
+// Debug per verificare la sessione
+error_log("Session ID in check_and_register.php: " . session_id());
+error_log("Session data: " . print_r($_SESSION, true));
+
 // Abilita CORS
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: https://vtesitaly.com");
+header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Max-Age: 86400");
