@@ -8,8 +8,16 @@ session_start();
 error_log("Session ID in check_and_register.php: " . session_id());
 error_log("Session data: " . print_r($_SESSION, true));
 
+$allowed_origins = [
+    "https://vtesitaly.com",
+    "https://www.vtesitaly.com"
+];
+
 // Abilita CORS
-header("Access-Control-Allow-Origin: https://vtesitaly.com");
+if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
+    header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
+}
+// header("Access-Control-Allow-Origin: https://vtesitaly.com");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
