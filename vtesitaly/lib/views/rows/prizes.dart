@@ -89,6 +89,7 @@ class _PrizesRowState extends State<PrizesRow> {
 
   Widget _buildCarouselSlider() {
     final List<String> imagePaths = [
+      "assets/images/prizes/prizes6.jpeg",
       "assets/images/prizes/prizes1.jpeg",
       "assets/images/prizes/event1.jpeg",
       "assets/images/prizes/prizes5.jpeg",
