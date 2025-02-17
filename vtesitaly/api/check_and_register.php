@@ -45,7 +45,7 @@ $stmt_check->bind_param("ss", $id_vekn, $email);
 $stmt_check->execute();
 $stmt_check->store_result();
 
-if ($stmt_check->num_rows > 0) {
+if ($stmt_check->num_rows > 0 and $subscription_type == 3) {
     // Se l'utente esiste, aggiorna solo la decklist
 
     $decklist_filename = save_decklist_to_file($decklist, $id_vekn, $name, $surname);
@@ -110,9 +110,9 @@ if ($stmt_check->num_rows > 0) {
 } else {
     // Effettua un pagamento con PayPal
     if ($subscription_type == 1) {
-        $price = 60.00;
+        $price = 90.00;
     } elseif ($subscription_type == 2) {
-        $price = 95.00;
+        $price = 125.00;
     } else {
         echo json_encode(["status" => "error", "message" => "Bad Parameters"]);
         $stmt_check->close();
