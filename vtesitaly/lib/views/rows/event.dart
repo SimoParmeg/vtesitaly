@@ -233,7 +233,7 @@ class _EventRowState extends State<EventRow> {
           height: 20
         ),
         const Text(
-          """Pre-registrations are opened until 16th February 2025.\nAfter this date we will open a second registration at higher prices.\n\nEnd of registrations: February 22nd, 2025. It will not be possible to register later""", 
+          """Pre-registrations are closed.\n Submit your decklist at least 12 hours before the event starts""", 
           style: TextStyle(
             fontSize: 16, 
             fontWeight: FontWeight.w700,
@@ -244,7 +244,7 @@ class _EventRowState extends State<EventRow> {
           height: 20
         ),
         const Text(
-          """DECKLIST SUBMISSION:\nyou can subscribe without decklist. However, you need to submit your decklist 12hrs before the event\nTo do so, click on subscribe again and compile the form with the same vekn id and email\nWe'll keep only the last decklist subscribed""", 
+          """DECKLIST SUBMISSION: click on subscribe the form with the data you used for registration, add your decklist\nWe'll keep only the last decklist subscribed""", 
           style: TextStyle(
             fontSize: 16, 
             fontWeight: FontWeight.w700,
@@ -255,7 +255,7 @@ class _EventRowState extends State<EventRow> {
           height: 20
         ),
         const Text(
-          """REFUNDING POLICY: we will refund your subscription until 16th february,\nget in touch with us in case.\nAfter 16th February we'll not refund 25€ for lunch fee""", 
+          """REFUNDING POLICY: we will refund your subscription until 16th february,\nget in touch with us in case.\nAfter 16th February we'll not refund 25€ for lunch fees""", 
           style: TextStyle(
             fontSize: 16, 
             fontWeight: FontWeight.w700,

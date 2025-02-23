@@ -206,20 +206,20 @@ class _SubscriptionFormState extends State<SubscriptionForm> {
                   "Select Subscription (all prices are lunch included) *"
                 )
               ),
-              DropdownMenuItem(
-                value: 1, 
-                child: Text(
-                  overflow: TextOverflow.ellipsis, 
-                  "Italian GP (Saturday), 90€"
-                )
-              ),
-              DropdownMenuItem(
-                value: 2, 
-                child: Text(
-                  overflow: TextOverflow.ellipsis, 
-                  "Italian GP + Redemption Event (Saturday + Sunday), 125€"
-                )
-              ),
+              // DropdownMenuItem(
+              //   value: 1, 
+              //   child: Text(
+              //     overflow: TextOverflow.ellipsis, 
+              //     "Italian GP (Saturday), 90€"
+              //   )
+              // ),
+              // DropdownMenuItem(
+              //   value: 2, 
+              //   child: Text(
+              //     overflow: TextOverflow.ellipsis, 
+              //     "Italian GP + Redemption Event (Saturday + Sunday), 125€"
+              //   )
+              // ),
               DropdownMenuItem(
                 value: 3, 
                 child: Text(
