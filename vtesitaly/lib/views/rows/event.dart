@@ -95,26 +95,34 @@ class _EventRowState extends State<EventRow> {
     final isMobile = MediaQuery.of(context).size.width < TRESHOLD_MOBILEMAXWIDTH;
 
     return !isMobile
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-                Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        ? Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Colonna con il testo e la tabella
+            Expanded(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                    Flexible(child: _buildColumnWidget()), 
-                    _buildImageWidget(isMobile),
+                  _buildColumnWidget(),
+                  const SizedBox(height: 40),
+                  const Text(
+                    "Table Seating - Round 1:",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 20),
+                  const ExcelTableWidget(),
+                  const SizedBox(height: 20),
                 ],
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                "Table Seating - Round 1:",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 20),
-                const ExcelTableWidget(),
-                const SizedBox(height: 20),
-            ],
+              ),
+            ),
+            // Spazio tra il testo e l'immagine
+            const SizedBox(width: 20),
+            // Immagine sulla destra
+            Flexible(
+              child: _buildImageWidget(isMobile),
+            ),
+          ],
         )
         : Column(
             mainAxisAlignment: MainAxisAlignment.start,
