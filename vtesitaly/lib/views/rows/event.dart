@@ -1,12 +1,14 @@
 import 'dart:async';
+import 'dart:typed_data';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:excel/excel.dart' as excel;
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:vtesitaly/config.dart';
 import 'package:vtesitaly/views/forms/registration.dart';
 
 class EventRow extends StatefulWidget {
-
   const EventRow({super.key});
 
   @override
@@ -14,14 +16,11 @@ class EventRow extends StatefulWidget {
 }
 
 class _EventRowState extends State<EventRow> {
-
   late Timer _timer;
   Duration _remainingTime = const Duration();
   final DateTime _targetDateTime = DateTime(2025, 3, 1, 9, 30, 0);
   String formattedCountdown = "";
-
   bool mouseOverSubscribe = false;
-
 
   @override
   void initState() {
@@ -29,13 +28,11 @@ class _EventRowState extends State<EventRow> {
     _startCountdown();
   }
 
-
-  @override 
+  @override
   void dispose() {
     _timer.cancel();
     super.dispose();
   }
-
 
   void _startCountdown() {
     _updateRemainingTime();
@@ -43,7 +40,6 @@ class _EventRowState extends State<EventRow> {
       _updateRemainingTime();
     });
   }
-
 
   void _updateRemainingTime() {
     final DateTime now = DateTime.now();
@@ -65,13 +61,12 @@ class _EventRowState extends State<EventRow> {
         formattedCountdown = '${years > 0 ? "$years anni " : ""}'
             '${months > 0 ? "$months months " : ""}'
             '${days > 0 ? "$days days " : ""}'
-            '${hours.toString().padLeft(2, '0')}:'
-            '${minutes.toString().padLeft(2, '0')}:'
+            '${hours.toString().padLeft(2, '0')}:'  
+            '${minutes.toString().padLeft(2, '0')}:'  
             '${seconds.toString().padLeft(2, '0')}';
       }
     });
   }
-
 
   void _showSubscriptionDialog(BuildContext context) {
     showDialog(
@@ -95,34 +90,53 @@ class _EventRowState extends State<EventRow> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < TRESHOLD_MOBILEMAXWIDTH;
-    
-    return !isMobile ? Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Flexible(child: _buildColumnWidget()),
-        _buildImageWidget(isMobile),
-        
-      ]
-    ) : Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildImageWidget(isMobile),
-        const SizedBox(height:20),
-        _buildColumnWidget()
-      ]
-    );
 
+    return !isMobile
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+                Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                    Flexible(child: _buildColumnWidget()), 
+                    _buildImageWidget(isMobile),
+                ],
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                "Table Seating - Round 1:",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 20),
+                const ExcelTableWidget(),
+                const SizedBox(height: 20),
+            ],
+        )
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildImageWidget(isMobile),
+              const SizedBox(height: 20),
+              _buildColumnWidget(),
+              const SizedBox(height: 40),
+              const Text(
+                "Table Seating - Round 1:",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 20),
+              const ExcelTableWidget(),
+              const SizedBox(height: 20),
+            ],
+          );
   }
 
-  Widget _buildColumnWidget(){
+  Widget _buildColumnWidget() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         RichText(
@@ -130,155 +144,152 @@ class _EventRowState extends State<EventRow> {
             children: [
               TextSpan(
                 text: "Italian ",
-                style: TextStyle(
-                  fontSize: 48, 
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
+                style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.black),
               ),
               TextSpan(
                 text: "Grand Prix ",
-                style: TextStyle(
-                  fontSize: 48, 
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue ,
-                ),
+                style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.blue),
               ),
               TextSpan(
                 text: "2024-25",
-                style: TextStyle(
-                  fontSize: 48, 
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black, 
-                ),
+                style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.black),
               ),
             ],
           ),
         ),
-        const SizedBox(
-          height: 16
-        ),
+        const SizedBox(height: 16),
+        const Text("Modena, Italy", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: Colors.black54)),
+        const SizedBox(height: 4),
+        const Text("March 1st, 2025", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: Colors.blue)),
+        const SizedBox(height: 12),
         Text(
-          "Modena, Italy", 
-          style: TextStyle(
-            fontSize: 16, 
-            fontWeight: FontWeight.w900,
-            color: Colors.black.withValues(alpha: 0.6)
-          )
+          formattedCountdown,
+          style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: Colors.black),
         ),
-        const SizedBox(
-          height: 4
-        ),
-        const Text(
-          "March 1st, 2025", 
-          style: TextStyle(
-            fontSize: 16, 
-            fontWeight: FontWeight.w900,
-            color: Colors.blue
-          )
-        ),
-        const SizedBox(
-          height: 12
-        ),
-        const Text(
-          "Event starts in:", 
-          style: TextStyle(
-            fontSize: 16, 
-            fontWeight: FontWeight.w900,
-            color: Colors.black
-          )
-        ),
-        const SizedBox(
-          height: 20
-        ),
-        Text(
-          formattedCountdown, 
-          style: const TextStyle(
-            fontSize: 25, 
-            fontWeight: FontWeight.w800,
-            color: Colors.black
-          )
-        ),
-        const SizedBox(
-          height: 12
-        ),
-        // 
-        GestureDetector(
-          onTap: () => _showSubscriptionDialog(context),
-          child: MouseRegion(
-            onEnter: (_) {
-              setState(() {
-                mouseOverSubscribe = true;
-              });
-            },
-            onExit: (_) {
-              setState(() {
-                mouseOverSubscribe = false;
-              });
-            },
-            cursor: SystemMouseCursors.click,
-            child: Text(
-              "Subscribe Here! (all prices are lunch included)",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
-                decoration: mouseOverSubscribe ? TextDecoration.underline : TextDecoration.none,
-                decorationColor: Colors.blue
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 20
-        ),
-        const Text(
-          """Pre-registrations are closed.\n Submit your decklist at least 12 hours before the event starts""", 
-          style: TextStyle(
-            fontSize: 16, 
-            fontWeight: FontWeight.w700,
-            color: Colors.red
-          )
-        ),
-        const SizedBox(
-          height: 20
-        ),
-        const Text(
-          """DECKLIST SUBMISSION: click on subscribe the form with the data you used for registration, add your decklist\nWe'll keep only the last decklist subscribed""", 
-          style: TextStyle(
-            fontSize: 16, 
-            fontWeight: FontWeight.w700,
-            color: Colors.red
-          )
-        ),
-                const SizedBox(
-          height: 20
-        ),
-        const Text(
-          """REFUNDING POLICY: we will refund your subscription until 16th february,\nget in touch with us in case.\nAfter 16th February we'll not refund 25€ for lunch fees""", 
-          style: TextStyle(
-            fontSize: 16, 
-            fontWeight: FontWeight.w700,
-            color: Colors.red
-          )
-        ),
+        const SizedBox(height: 20),
       ],
     );
   }
 
-  Widget _buildImageWidget(bool isMobile){
+  Widget _buildImageWidget(bool isMobile) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: Image.asset(
         "assets/images/logo_gp.png",
-        width: !isMobile 
-          ? min(475, MediaQuery.of(context).size.width/2-32) 
-          : MediaQuery.of(context).size.width-64,
-        height: !isMobile 
-          ? min(475, MediaQuery.of(context).size.width/2-32) 
-          : MediaQuery.of(context).size.width-64,
+        width: !isMobile ? min(475, MediaQuery.of(context).size.width / 2 - 32) : MediaQuery.of(context).size.width - 64,
+        height: !isMobile ? min(475, MediaQuery.of(context).size.width / 2 - 32) : MediaQuery.of(context).size.width - 64,
         fit: BoxFit.cover,
-      )
+      ),
     );
+  }
+}
+
+class ExcelTableWidget extends StatefulWidget {
+  const ExcelTableWidget({super.key});
+
+  @override
+  _ExcelTableWidgetState createState() => _ExcelTableWidgetState();
+}
+
+class _ExcelTableWidgetState extends State<ExcelTableWidget> {
+  List<List<String>> tableData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadExcelData();
+  }
+
+  Future<void> _loadExcelData() async {
+    ByteData data = await rootBundle.load("assets/archon/archon.xlsx");
+    Uint8List bytes = data.buffer.asUint8List();
+    var excelFile = excel.Excel.decodeBytes(bytes);
+
+    List<List<String>> rows = [];
+
+    if (excelFile.tables.containsKey("Round 1")) {
+      var sheet = excelFile.tables["Round 1"]!;
+      int headerRowIndex = 0; // Supponiamo che la riga 6 contenga le intestazioni
+
+      if (headerRowIndex < sheet.maxRows) {
+        // Aggiungere le intestazioni
+        rows.add(["Table #", "First Name", "Last Name", "Seat Number"]);
+
+        String? currentTable;
+        int seatNumber = 1;
+
+        for (int i = headerRowIndex + 1; i < sheet.maxRows; i++) {
+          var row = sheet.rows[i];
+
+          if (row.length >= 4 && row[0]?.value != null) {
+            String tableNumber = row[3]?.value.toString() ?? "";
+
+            // Se cambiamo table #, resettiamo seatNumber a 1
+            if (currentTable != tableNumber) {
+              currentTable = tableNumber;
+              seatNumber = 1;
+
+              rows.add(["Table $tableNumber", "", "", ""]);
+            }
+
+            rows.add([
+              tableNumber, // Table
+              row[1]?.value.toString() ?? "", // First Name
+              row[2]?.value.toString() ?? "", // Last Name
+              seatNumber.toString(), // Seat Number
+            ]);
+
+            // Incrementa seatNumber
+            seatNumber += 1;
+          }
+        }
+      }
+    }
+
+    setState(() {
+      tableData = rows;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return tableData.isEmpty
+        ? const Center(child: CircularProgressIndicator())
+        : Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey), // Bordo tabella
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: DataTable(
+                columnSpacing: 20,
+                headingRowColor: WidgetStateColor.resolveWith((states) => Colors.blue.shade100), // Sfondo intestazioni
+                dataRowColor: WidgetStateColor.resolveWith(
+                  (states) => states.contains(WidgetState.selected) ? Colors.blue.shade200 : Colors.white,
+                ),
+                border: TableBorder.all(color: Colors.grey), // Bordo celle
+                columns: tableData.first
+                    .map((col) => DataColumn(label: Text(col, style: const TextStyle(fontWeight: FontWeight.bold))))
+                    .toList(),
+                rows: tableData.skip(1).map((row) {
+                  bool isSeparator = row[1] == "" && row[2] == "" && row[3] == "";
+                  return DataRow(
+                    cells: row.map((cell) {
+                      return DataCell(
+                        Text(
+                          cell,
+                          style: TextStyle(
+                            fontWeight: isSeparator ? FontWeight.bold : FontWeight.normal,
+                            fontSize: isSeparator ? 16 : 14,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  );
+                }).toList(),
+              ),
+            ),
+          );
   }
 }
