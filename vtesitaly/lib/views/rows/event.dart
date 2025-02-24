@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element, library_private_types_in_public_api
+
 import 'dart:async';
 import 'dart:typed_data';
 import 'dart:math';
@@ -201,11 +203,48 @@ class ExcelTableWidget extends StatefulWidget {
 
 class _ExcelTableWidgetState extends State<ExcelTableWidget> {
   List<List<String>> tableData = [];
+  final ScrollController _scrollController = ScrollController();
+  late Timer _scrollTimer;
+  double rowHeight = 0.0;
 
   @override
   void initState() {
     super.initState();
     _loadExcelData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _startAutoScroll();
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _scrollTimer.cancel();
+    super.dispose();
+  }
+
+  void _startAutoScroll() {
+    _scrollTimer = Timer.periodic(const Duration(seconds: 7), (timer) {
+      if (_scrollController.hasClients) {
+        double maxScrollExtent = _scrollController.position.maxScrollExtent;
+        double currentPosition = _scrollController.position.pixels;
+
+        if (currentPosition < maxScrollExtent) {
+          _scrollController.animateTo(
+            currentPosition + 288,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeOut,
+          );
+        } else {
+          // Se siamo in fondo, torna all'inizio
+          _scrollController.animateTo(
+            0.0,
+            duration: const Duration(seconds: 2),
+            curve: Curves.easeOut,
+          );
+        }
+      }
+    });
   }
 
   Future<void> _loadExcelData() async {
@@ -217,10 +256,9 @@ class _ExcelTableWidgetState extends State<ExcelTableWidget> {
 
     if (excelFile.tables.containsKey("Round 1")) {
       var sheet = excelFile.tables["Round 1"]!;
-      int headerRowIndex = 0; // Supponiamo che la riga 6 contenga le intestazioni
+      int headerRowIndex = 0; 
 
       if (headerRowIndex < sheet.maxRows) {
-        // Aggiungere le intestazioni
         rows.add(["Table #", "First Name", "Last Name", "Seat Number"]);
 
         String? currentTable;
@@ -232,22 +270,19 @@ class _ExcelTableWidgetState extends State<ExcelTableWidget> {
           if (row.length >= 4 && row[0]?.value != null) {
             String tableNumber = row[3]?.value.toString() ?? "";
 
-            // Se cambiamo table #, resettiamo seatNumber a 1
             if (currentTable != tableNumber) {
               currentTable = tableNumber;
               seatNumber = 1;
-
               rows.add(["Table $tableNumber", "", "", ""]);
             }
 
             rows.add([
-              tableNumber, // Table
-              row[1]?.value.toString() ?? "", // First Name
-              row[2]?.value.toString() ?? "", // Last Name
-              seatNumber.toString(), // Seat Number
+              tableNumber,
+              row[1]?.value.toString() ?? "",
+              row[2]?.value.toString() ?? "",
+              seatNumber.toString(),
             ]);
 
-            // Incrementa seatNumber
             seatNumber += 1;
           }
         }
@@ -264,38 +299,59 @@ class _ExcelTableWidgetState extends State<ExcelTableWidget> {
     return tableData.isEmpty
         ? const Center(child: CircularProgressIndicator())
         : Container(
+            height: 400, // Altezza massima per la tabella, così ha spazio per scorrere
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey), // Bordo tabella
+              border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: DataTable(
-                columnSpacing: 20,
-                headingRowColor: WidgetStateColor.resolveWith((states) => Colors.blue.shade100), // Sfondo intestazioni
-                dataRowColor: WidgetStateColor.resolveWith(
-                  (states) => states.contains(WidgetState.selected) ? Colors.blue.shade200 : Colors.white,
+            child: Scrollbar(
+              controller: _scrollController,
+              thumbVisibility: true,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: SizedBox(
+                  width: 600, 
+                  child: SingleChildScrollView(
+                    controller: _scrollController, // Assegniamo il controller
+                    scrollDirection: Axis.vertical,
+                    child: DataTable(
+                      columnSpacing: 20,
+                      headingRowColor: WidgetStateColor.resolveWith(
+                          (states) => Colors.blue.shade100),
+                      dataRowColor: WidgetStateColor.resolveWith(
+                        (states) => states.contains(WidgetState.selected)
+                            ? Colors.blue.shade200
+                            : Colors.white,
+                      ),
+                      border: TableBorder.all(color: Colors.grey),
+                      columns: tableData.first
+                          .map((col) => DataColumn(
+                              label: Text(col,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold))))
+                          .toList(),
+                      rows: tableData.skip(1).map((row) {
+                        bool isSeparator =
+                            row[1] == "" && row[2] == "" && row[3] == "";
+                        return DataRow(
+                          cells: row.map((cell) {
+                            return DataCell(
+                              Text(
+                                cell,
+                                style: TextStyle(
+                                  fontWeight: isSeparator
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  fontSize: isSeparator ? 16 : 14,
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        );
+                      }).toList(),
+                    ),
+                  ),
                 ),
-                border: TableBorder.all(color: Colors.grey), // Bordo celle
-                columns: tableData.first
-                    .map((col) => DataColumn(label: Text(col, style: const TextStyle(fontWeight: FontWeight.bold))))
-                    .toList(),
-                rows: tableData.skip(1).map((row) {
-                  bool isSeparator = row[1] == "" && row[2] == "" && row[3] == "";
-                  return DataRow(
-                    cells: row.map((cell) {
-                      return DataCell(
-                        Text(
-                          cell,
-                          style: TextStyle(
-                            fontWeight: isSeparator ? FontWeight.bold : FontWeight.normal,
-                            fontSize: isSeparator ? 16 : 14,
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  );
-                }).toList(),
               ),
             ),
           );
