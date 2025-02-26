@@ -203,6 +203,25 @@ class _EventRowState extends State<EventRow> {
             ),
           ),
         ),
+                const SizedBox(
+          height: 20
+        ),
+        const Text(
+          """Remember to submit your decklist 12hrs before event starts""", 
+          style: TextStyle(
+            fontSize: 16, 
+            fontWeight: FontWeight.w700,
+            color: Colors.red
+          )
+        ),
+        const Text(
+          """REFUNDING POLICY: After 22nd February we won't refund you the lunch costs in case of non partecipation""", 
+          style: TextStyle(
+            fontSize: 16, 
+            fontWeight: FontWeight.w700,
+            color: Colors.red
+          )
+        ),
       ],
     );
   }
