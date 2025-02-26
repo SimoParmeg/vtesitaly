@@ -177,6 +177,32 @@ class _EventRowState extends State<EventRow> {
           style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: Colors.black),
         ),
         const SizedBox(height: 20),
+        GestureDetector(
+          onTap: () => _showSubscriptionDialog(context),
+          child: MouseRegion(
+            onEnter: (_) {
+              setState(() {
+                mouseOverSubscribe = true;
+              });
+            },
+            onExit: (_) {
+              setState(() {
+                mouseOverSubscribe = false;
+              });
+            },
+            cursor: SystemMouseCursors.click,
+            child: Text(
+              "Submit your decklist here!",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+                decoration: mouseOverSubscribe ? TextDecoration.underline : TextDecoration.none,
+                decorationColor: Colors.blue
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
