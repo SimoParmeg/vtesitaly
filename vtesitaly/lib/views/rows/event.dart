@@ -32,6 +32,13 @@ class _EventRowState extends State<EventRow> {
                   children: [
                     _buildColumnWidget(),
                     const SizedBox(height: 40),
+                    const Text(
+                    "FINAL STANDINGS",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 20),
+                  const ExcelTableWidget(),
+                  const SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -49,6 +56,13 @@ class _EventRowState extends State<EventRow> {
               const SizedBox(height: 20),
               _buildColumnWidget(),
               const SizedBox(height: 40),
+              const Text(
+                "FINAL STANDINGS",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 20),
+              const ExcelTableWidget(),
+              const SizedBox(height: 20),
             ],
           );
   }
@@ -117,7 +131,7 @@ class _ExcelTableWidgetState extends State<ExcelTableWidget> {
   List<List<String>> tableData = [];
   final ScrollController _scrollController = ScrollController();
   late Timer _scrollTimer;
-  final int rowsPerScroll = 6;
+  final int rowsPerScroll = 10;
   double rowHeight = 48.0;
 
   @override
@@ -198,7 +212,7 @@ class _ExcelTableWidgetState extends State<ExcelTableWidget> {
     return tableData.isEmpty
         ? const Center(child: CircularProgressIndicator())
         : Container(
-            height: 346,
+            height: 490,
             width: 600,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
@@ -233,7 +247,7 @@ class _ExcelTableWidgetState extends State<ExcelTableWidget> {
                       ],
                       rows: tableData.skip(1).map((row) {
                         return DataRow(
-                          cells: row.map((cell) => DataCell(Text(cell))).toList(),
+                          cells: row.map((cell) => DataCell(Center(child: Text(cell)))).toList(),
                         );
                       }).toList(),
                     ),
